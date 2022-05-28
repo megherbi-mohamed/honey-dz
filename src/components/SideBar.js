@@ -44,11 +44,11 @@ const SideBar = () => {
                         <FontAwesomeIcon icon={faArrowLeft} className=""/>
                         <span className="ml-[12px] text-[16px]">Back</span>
                     </button>
-                    <Link to="/collections/swimwear" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>Swimwear</Link>
-                    <Link to="/collections/sets" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>Sets</Link>
-                    <Link to="/collections/one-piece" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>One-piece</Link>
-                    <Link to="/collections/tops" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>Tops</Link>
-                    <Link to="/collections/bottoms" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>Bottoms</Link>
+                    <Link to="/collections/honey" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>HONEY</Link>
+                    <Link to="/collections/honeycomb" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>HONEYCOMB</Link>
+                    <Link to="/collections/gifts" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>GIFTS</Link>
+                    <Link to="/collections/candles" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>CANDLES</Link>
+                    <Link to="/collections/courses" className="w-[100%] block px-[16px] py-[12px]" onClick={()=>hide()}>COURSES</Link>
                 </div>
             </div>
             <div className="w-full w-[10%] md:w-[calc(100%-450px)] h-full" onClick={()=>hide()}></div>

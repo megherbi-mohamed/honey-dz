@@ -75,7 +75,7 @@ const Navbar = () => {
                     </div>
                     <div className="relative">
                         <Link exact to="/">
-                            <img src="/images/logo.webp" alt="" className="w-[130px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                            <img src="/images/logo.webp" alt="" className="w-[190px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </Link>
                     </div>
                     <div className="flex items-center justify-end">
