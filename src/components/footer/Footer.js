@@ -73,10 +73,10 @@ function Footer() {
           <img src="/images/paypal.png" alt="" className="w-[60px]"/>
           <img src="/images/mastercard.png" alt="" className="w-[60px]"/>
         </div>
-        <span className="text-black text-[.9rem] md:mb-0 justify-self-center hidden md:block">© Yetobe-paris 2022</span>
+        <span className="text-black text-[.9rem] md:mb-0 justify-self-center hidden md:block">© SLIMI-abeilles 2022</span>
         <FontAwesomeIcon icon={faInstagram} className="justify-self-end hidden md:block"/>
         <div className="w-[53%] mx-auto flex md:hidden items-center justify-between">
-          <span className="text-black text-[.9rem] md:mb-0 self-center">© Yetobe-paris 2022</span>
+          <span className="text-black text-[.9rem] md:mb-0 self-center">© SLIMI-abeilles 2022</span>
           <FontAwesomeIcon icon={faInstagram} className=''/>
         </div>
       </div>
