@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch } from 'react-redux';
 import { useCart } from 'react-use-cart'
+import { useAlert } from 'react-alert'
 import decode from 'jwt-decode';
 
 import * as actionType from '../constants/actionTypes';
@@ -13,6 +14,7 @@ const Commande = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const alert = useAlert()
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
@@ -29,6 +31,7 @@ const Commande = () => {
             if (decodedToken.exp*1000  < new Date().getTime()) logout();
         }
         else{  navigate('/account') }
+        setForm({ ...form, country: 'Algérie', city:'Alger', common:'Alger' });
     }, [location]);
 
     const { 
@@ -62,8 +65,15 @@ const Commande = () => {
 
     let formData = {commande:form,produits:setitems(items),facture:setFacture(items)}
     const handleSubmit = (e) => {
-        e.preventDefault()
-        insertCommande(formData,navigate)
+        e.preventDefault();
+        if (form.firstname === '') {alert.error('Enter your firstname please',{ timeout: 4000})}
+        else if (form.lastname === '') {alert.error('Enter your lastname please',{ timeout: 4000})}
+        else if (form.address1 === '') {alert.error('Enter your address please',{ timeout: 4000})}
+        else if (form.code === '') {alert.error('Enter your Zip code please',{ timeout: 4000})}
+        else if (form.phone === '') {alert.error('Enter your phone please',{ timeout: 4000})}
+        else {
+            insertCommande(formData,navigate)
+        }
     }
     
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });

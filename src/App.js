@@ -1,6 +1,8 @@
 import React from "react";
 import {BrowserRouter,Route,Routes} from 'react-router-dom';
 import { CartProvider } from "react-use-cart";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 
 import Navbar from "./components/navbar/Navbar";
 import Home from "./components/Home";
@@ -26,35 +28,47 @@ import Share from "./components/Share"
 
 import ScrollTop from "./components/ScrollTop";
 
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.TOP_CENTER,
+  timeout: 5000,
+  offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
+}
+
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <CartProvider>
-          <Navbar />
-          <ScrollTop />
-            <Routes>
-              <Route exact path="/" element={<Home/>} />
-              <Route exact path="/about" element={<About/>} />
-              <Route exact path="/account" element={<Account/>} />
-              <Route exact path="/account/register" element={<Register/>} />
-              <Route exact path="/products/:name" element={<Products/>} />
-              <Route exact path="/collections/:id" element={<Collections/>} />
-              <Route exact path="/cart" element={<Cart />} />
-              <Route exact path="/terms-conditions" element={<TermsConditions />} />
-              <Route exact path="/commande" element={<Commande />} />
-            </Routes>
-          <HideBody />
-          <QuikViewProduct />
-          <SideCart />
-          <SideFilter />
-          <SideBar />
-          <SideAccount />
-          <CarouselOverview />
-          <AskQuestion />
-          <Share />
-          <Footer />
-        </CartProvider>
+        <AlertProvider template={AlertTemplate} {...options}>
+          <CartProvider>
+            <Navbar />
+            <ScrollTop />
+              <Routes>
+                <Route exact path="/" element={<Home/>} />
+                <Route exact path="/about" element={<About/>} />
+                <Route exact path="/account" element={<Account/>} />
+                <Route exact path="/account/register" element={<Register/>} />
+                <Route exact path="/products/:name" element={<Products/>} />
+                <Route exact path="/collections/:id" element={<Collections/>} />
+                <Route exact path="/cart" element={<Cart />} />
+                <Route exact path="/terms-conditions" element={<TermsConditions />} />
+                <Route exact path="/commande" element={<Commande />} />
+              </Routes>
+            <HideBody />
+            <QuikViewProduct />
+            <SideCart />
+            <SideFilter />
+            <SideBar />
+            <SideAccount />
+            <CarouselOverview />
+            <AskQuestion />
+            <Share />
+            <Footer />
+          </CartProvider>
+        </AlertProvider>
       </BrowserRouter>
     </>
   )
