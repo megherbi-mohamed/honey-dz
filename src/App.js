@@ -9,6 +9,8 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Account from "./components/Account";
 import Register from "./components/Register";
+import Addresses from "./components/address/Addresses";
+import AddressForm from "./components/address/AddressForm";
 import Collections from "./components/Collections";
 import Products from "./components/product-detail/Products";
 import Footer from "./components/footer/Footer";
@@ -51,6 +53,8 @@ const App = () => {
                 <Route exact path="/about" element={<About/>} />
                 <Route exact path="/account" element={<Account/>} />
                 <Route exact path="/account/register" element={<Register/>} />
+                <Route exact path="/account/addresses" element={<Addresses/>} />
+                <Route exact path="/account/addresses/update/:id" element={<AddressForm/>} />
                 <Route exact path="/products/:name" element={<Products/>} />
                 <Route exact path="/collections/:id" element={<Collections/>} />
                 <Route exact path="/cart" element={<Cart />} />

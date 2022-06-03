@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useAlert } from 'react-alert'
 import decode from 'jwt-decode';
 
-import { signin } from '../actions/auth';
 import * as actionType from '../constants/actionTypes';
+import { signin } from '../actions/auth';
+import { getUserAddresses } from '../actions/address';
 
 const Account = () => {
 
+    const { addresses } = useSelector((state) => state.addresses);
+    const {message, loading} = useSelector((state) => state.message);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
+    const alert = useAlert()
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
@@ -21,21 +26,35 @@ const Account = () => {
         setUser(null);
     };
 
-    useEffect(() => {
+    useEffect(async () => {
         const token = user?.token;
         if (token) {
             const decodedToken = decode(token);
             if (decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
         setUser(JSON.parse(localStorage.getItem('profile')));
+        await dispatch(getUserAddresses());
     }, [location]);
+
+    useEffect(() => {
+        if (message !== '') {
+            alert.success(message,{ timeout: 4000})
+        }
+        console.log(message);
+        console.log(loading);
+    }, [message])
+    
 
     const initialState = { email: '', password: ''}
     const [form, setForm] = useState(initialState)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(signin(form, navigate))
+        if (form.email === '') {alert.error('Enter your email please',{ timeout: 4000})}
+        else if (form.password === '') {alert.error('Enter your password please',{ timeout: 4000})}
+        else{
+            dispatch(signin(form, navigate))
+        }
     }
     
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -54,7 +73,7 @@ const Account = () => {
                     </div>
                     <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
                         <div class="md:px-4 xl:px-16 w-1/6 sf-customer__nav hidden md:flex flex-col border-r border-color-border">
-                            <Link to="/account" className="mb-[12px]">Dashboard</Link>
+                            <Link to="/account" className="mb-[12px] font-bold">Dashboard</Link>
                             <Link to="/account/addresses" className="mb-[12px]">Addresses</Link>
                             <button onClick={logout} className='pl-0 text-left'>Log Out</button>
                         </div>
@@ -88,7 +107,7 @@ const Account = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Link to="/account/addresses" className='px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] w-auto inline-block hover:outline-[3px]'>View Addresses (1)</Link>
+                            <Link to="/account/addresses" className='px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] w-auto inline-block hover:outline-[3px]'>View Addresses ({addresses.length})</Link>
                         </div>
                     </div>
                 </>
@@ -108,7 +127,9 @@ const Account = () => {
                             <form onSubmit={handleSubmit}>
                                 <input onChange={handleChange} type="email" name="email" placeholder="Email" className="mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]"/>
                                 <input onChange={handleChange} type="password" name="password" placeholder="Password" className="mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]"/>
-                                <button type="submit" className="mt-[16px] mb-[12px] px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block w-full rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]">Sigin in</button>
+                                <button type="submit" className="mt-[16px] mb-[12px] px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block w-full rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]">
+                                    {loading ?  (<div className='loader-button'></div>) : ('Sign in')}
+                                </button>
                             </form>
                         </div>
                         <div className="md:mx-[40px] w-full md:w-[330px]">
