@@ -16,8 +16,8 @@ const AddressForm = () => {
     let { id } = useParams();
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-    const { address, message } = useSelector((state) => state.addresses);
-    const loading = useSelector((state) => state.loading);
+    const { address } = useSelector((state) => state.addresses);
+    const {message, loading} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const alert = useAlert();
@@ -32,15 +32,14 @@ const AddressForm = () => {
         setUser(null);
     };
 
-    useEffect(async () => {
-        await setcountryArray(Country.getAllCountries());
-        await dispatch(getUserAddress(id));
-    }, []);
+    // useEffect(async () => {
+        
+    // }, [id]);
     
-    useEffect(() => {
+    useEffect(async () => {
         setForm({ ...form, 
-            firstname: user?.result.firstname,
-            lastname: user?.result.lastname,
+            firstname: address.firstname,
+            lastname: address.lastname,
             address1: address.address1,
             address2: address.address2,
             country: (address.country ? address.country : 'DZ'),
@@ -49,13 +48,10 @@ const AddressForm = () => {
             zipcode: address.zipcode,
             phone: address.phone
         });
-        console.log(address);
-    }, [address])
 
-    useEffect(() => {
-      console.log(form);
-    }, [form])
-    
+        await setcountryArray(Country.getAllCountries());
+        await dispatch(getUserAddress(id));
+    }, [address])
 
     useEffect(() => {
         if (message !== '') {
@@ -63,25 +59,55 @@ const AddressForm = () => {
         }
     }, [message])
 
-    // useEffect(async () => {
-    //     if (address.country === undefined) {
-    //         document.getElementById('DZ').selected = 'selected'
-    //         await setstateArray(State.getStatesOfCountry('DZ'))
+    useEffect(async () => {
+        if (countryArray.length > 0) {
+            console.log('countryArray');
+            if (address.country) {
+                console.log('countryArray address');
+                document.getElementById(address.country).selected = 'selected'
+                await setstateArray(State.getStatesOfCountry(address.country))
+            }
+            else{
+                console.log('countryArray no address');
+                document.getElementById('DZ').selected = 'selected'
+                await setstateArray(State.getStatesOfCountry('DZ'))
+            }
+            var country = document.getElementById("country")
+            var countryCode = country.options[country.selectedIndex].id
+            await setstateArray(State.getStatesOfCountry(countryCode))
+        }
+    }, [countryArray])
 
-    //         var country = document.getElementById("country")
-    //         var countryCode = country.options[country.selectedIndex].id
-    //         await setstateArray(State.getStatesOfCountry(countryCode))
+    useEffect(() => {
+        if (stateArray.length > 0) {
+            console.log('stateArray');
+            if (address.state) {
+                console.log('stateArray address');
+                document.getElementById(address.state).selected = 'selected'
+            }
+            else{
+                console.log('stateArray no address');
+                document.getElementById('01').selected = 'selected'
+            }
+        }
+    }, [stateArray])
+
+    // useEffect(() => {
+    //     if (form.country) {
+    //         document.getElementById(form.country).selected = 'selected'
     //     }
-    //     else{
-
+    // }, [form.country])
+    
+    // useEffect(() => {
+    //     if (form.country) {
+    //         document.getElementById(form.state).selected = 'selected'
     //     }
-    //     console.log(address.country);
-    // }, [countryArray])
+    // }, [form.state])
 
-    // useEffect(async () => {
+    // useEffect(() => {
     //     var country = document.getElementById("country");
     //     var countryCode = country.options[country.selectedIndex].id;
-    //     await setstateArray(State.getStatesOfCountry(countryCode))
+    //     setstateArray(State.getStatesOfCountry(countryCode))
     // }, [form.country])
 
     const handleSubmit = (id) => (e) => {
@@ -182,7 +208,7 @@ const AddressForm = () => {
                             </div>
                             <div className='flex items-center mt-[30px]'>
                                 <button type='submit' className='px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] w-auto inline-block hover:outline-[3px]'>
-                                    {loading.button ?  (<div className='loader-button'></div>) : ('Update address')}
+                                    {loading ?  (<div className='loader-button'></div>) : ('Update address')}
                                 </button>
                                 <Link to='/account/addresses' className='ml-[30px]'>Cancel</Link>
                             </div>

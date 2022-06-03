@@ -5,25 +5,32 @@ export const signin = (formData, navigate) => async (dispatch) => {
   dispatch({ type: "loading", payload: {message: '',loading: true} });
   try {
     const { data } = await api.signIn(formData);
-    console.log(data);
     dispatch({ type: AUTH, data });
     dispatch({ type: "loading", payload: {message:data.message, loading: false} });
-    navigate('/account');
+    dispatch({ type: "reset" });
+    if (data.result) {
+      dispatch({ type: 'display', payload: {sideAccount:'',hideBody:''}})
+      return navigate('/account');
+    }
   } catch (error) {
-    // console.log(error);
     dispatch({ type: "loading", payload: {message:error.message, loading: false} });
     console.log(error);
   }
 };
 
 export const signup = (formData, navigate) => async (dispatch) => {
-  dispatch({ type: "loading", payload: {button: true} });
+  dispatch({ type: "loading", payload: {message: '',loading: true} });
   try {
     const { data } = await api.signUp(formData);
     dispatch({ type: AUTH, data });
-    dispatch({ type: "loading", payload: {button: false} });
-    navigate('/account');
+    dispatch({ type: "loading", payload: {message:data.message, loading: false} });
+    dispatch({ type: "reset" });
+    if (data.result) {
+      dispatch({ type: 'display', payload: {sideAccount:'',hideBody:''}})
+      return navigate('/account');
+    }
   } catch (error) {
+    dispatch({ type: "loading", payload: {message:error.message, loading: false} });
     console.log(error);
   }
 };

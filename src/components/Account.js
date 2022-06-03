@@ -12,7 +12,7 @@ import { getUserAddresses } from '../actions/address';
 
 const Account = () => {
 
-    const { addresses } = useSelector((state) => state.addresses);
+    const {addresses} = useSelector((state) => state.addresses);
     const {message, loading} = useSelector((state) => state.message);
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
@@ -30,21 +30,22 @@ const Account = () => {
         const token = user?.token;
         if (token) {
             const decodedToken = decode(token);
-            if (decodedToken.exp * 1000 < new Date().getTime()) { 
-                logout() 
-            } else {
-                await dispatch(getUserAddresses());
-                setUser(JSON.parse(localStorage.getItem('profile')));
-            }
+            if (decodedToken.exp * 1000 < new Date().getTime()) logout() 
+        }
+        else {
+            setUser(JSON.parse(localStorage.getItem('profile')));
         }
     }, [location]);
 
     useEffect(() => {
+        if (user) dispatch(getUserAddresses());
+    }, [user])
+    
+
+    useEffect(() => {
         if (message !== '') {
-            alert.success(message,{ timeout: 4000})
+            alert.success(message,{ timeout: 2000})
         }
-        console.log(message);
-        console.log(loading);
     }, [message])
     
 
@@ -128,7 +129,7 @@ const Account = () => {
                         <div className="md:mx-[40px] w-full md:w-[330px]">
                             <h3 className="mb-[24px] text-[1.2rem]">Log In</h3>
                             <form onSubmit={handleSubmit}>
-                                <input onChange={handleChange} type="email" name="email" placeholder="Email" className="mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]"/>
+                                <input onChange={handleChange} type="email" name="email" placeholder="Email" autoComplete='off' className="mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]"/>
                                 <input onChange={handleChange} type="password" name="password" placeholder="Password" className="mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]"/>
                                 <button type="submit" className="mt-[16px] mb-[12px] px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block w-full rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]">
                                     {loading ?  (<div className='loader-button'></div>) : ('Sign in')}

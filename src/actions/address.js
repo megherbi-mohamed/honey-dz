@@ -31,13 +31,13 @@ export const insertAddress = (formData) => async (dispatch) => {
 };
 
 export const updateAddress = (id, formData) => async (dispatch) => {
-    dispatch({ type: "loading", payload: {button: true} });
+    dispatch({ type: "loading", payload: {message: '',loading: true} });
     try {
         const {data} = await api.updateAddress(id,formData);
-        dispatch({ type: "UPDATE_USER_ADDRESS", payload: data.message });
-        dispatch({ type: "UPDATE_USER_ADDRESS", payload:'' });
-        dispatch({ type: "loading", payload: {button: false} });
+        dispatch({ type: "loading", payload: {message:data.message, loading: false} });
+        dispatch({ type: "reset" });
     } catch (error) {
+        dispatch({ type: "loading", payload: {message:error.message, loading: false} });
         console.log(error);
     }
 };
