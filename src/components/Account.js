@@ -30,10 +30,13 @@ const Account = () => {
         const token = user?.token;
         if (token) {
             const decodedToken = decode(token);
-            if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+            if (decodedToken.exp * 1000 < new Date().getTime()) { 
+                logout() 
+            } else {
+                await dispatch(getUserAddresses());
+                setUser(JSON.parse(localStorage.getItem('profile')));
+            }
         }
-        setUser(JSON.parse(localStorage.getItem('profile')));
-        await dispatch(getUserAddresses());
     }, [location]);
 
     useEffect(() => {
