@@ -38,23 +38,49 @@ const Commande = () => {
 
     useEffect(() => {
         if (addresses.length > 0) {
-            dispatch(getUserAddress(addresses[0]._id));
+            setForm({ ...form, 
+                firstname: addresses[0].firstname,
+                lastname: addresses[0].lastname,
+                address1: addresses[0].address1,
+                address2: addresses[0].address2,
+                country: (addresses[0].country ? addresses[0].country : 'DZ'),
+                state: (addresses[0].state ? addresses[0].state : '01' ),
+                city: addresses[0].city,
+                zipcode: addresses[0].zipcode,
+                phone: addresses[0].phone
+            });
         }
     }, [addresses])
-    
-    useEffect(() => {
-        setForm({ ...form, 
-            firstname: address.firstname,
-            lastname: address.lastname,
-            address1: address.address1,
-            address2: address.address2,
-            country: (address.country ? address.country : 'DZ'),
-            state: (address.state ? address.state : '01' ),
-            city: address.city,
-            zipcode: address.zipcode,
-            phone: address.phone
-        });
-    }, [address])
+
+    const handleAddressChange = (e) => {
+        let index = e.target.value;
+        if (index === 'new') {
+            setForm({ ...form, 
+                firstname: '',
+                lastname: '',
+                address1: '',
+                address2: '',
+                country: 'DZ',
+                state: '01',
+                city: '',
+                zipcode: '',
+                phone: ''
+            });
+        }
+        else{
+            setForm({ ...form, 
+                firstname: addresses[index].firstname,
+                lastname: addresses[index].lastname,
+                address1: addresses[index].address1,
+                address2: addresses[index].address2,
+                country: (addresses[index].country ? addresses[0].country : 'DZ'),
+                state: (addresses[index].state ? addresses[0].state : '01' ),
+                city: addresses[index].city,
+                zipcode: addresses[index].zipcode,
+                phone: addresses[index].phone
+            })
+        }
+    }
     
     useEffect(async () => {
         if (countries.length > 0) {
@@ -139,7 +165,7 @@ const Commande = () => {
         else {setcart(init)}
     }
 
-    if (!address || addresses.length == 0 || countries.length == 0) {
+    if (!address || addresses.length === 0 || countries.length === 0) {
         return <div className='mt-[100px]'>loading</div>
     }
 
@@ -214,20 +240,20 @@ const Commande = () => {
                                     <p className='text-gray-500 text-[0.9rem]'>Email me with news and offers</p>
                                 </div>
                                 <h2 className='mb-[10px] text-[#403331] text-[18px]'>Shipping addresse</h2>
-                                <form onSubmit={handleSubmit}>
-                                    <div className='w-full relative'>
-                                        <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Saved addresses</span>
-                                        <div className="select-wrapper">
-                                            <select className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
-                                                {addresses ?
-                                                    addresses.map((address,index) => (
-                                                        <option key={index} value={address._id}>{address.country+' '+'('+address.firstname+' '+address.lastname+')'}</option>
-                                                    )) : null
-                                                }
-                                                <option value="new">Use a new address</option>
-                                            </select>
-                                        </div>
+                                <div className='w-full relative'>
+                                    <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Saved addresses</span>
+                                    <div className="select-wrapper">
+                                        <select onChange={handleAddressChange} className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
+                                            {addresses ?
+                                                addresses.map((address,index) => (
+                                                    <option key={index} value={index}>{address.country+' '+'('+address.firstname+' '+address.lastname+')'}</option>
+                                                )) : null
+                                            }
+                                            <option value="new">Use a new address</option>
+                                        </select>
                                     </div>
+                                </div>
+                                <form onSubmit={handleSubmit}>
                                     <div className='w-full grid grid-cols-2 gap-[15px] mt-[10px]'>
                                         <input onChange={handleChange} type="text" name="firstname" value={form.firstname || ''} autoComplete="off" placeholder='First name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                         <input onChange={handleChange} type="text" name="lastname" value={form.lastname || ''} autoComplete="off" placeholder='last name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
@@ -265,7 +291,7 @@ const Commande = () => {
                                             <input onChange={handleChange} type="text" name="city" placeholder='City' value={form.city || ''} autoComplete="off" className='px-[12px] py-[12px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                         </div>
                                     </div>
-                                    <input onChange={handleChange} type="text" name="code" placeholder='Zip code' value={form.zipcode || ''} autoComplete="off" className='mt-[15px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    <input onChange={handleChange} type="text" name="zipcode" placeholder='Zip code' value={form.zipcode || ''} autoComplete="off" className='mt-[15px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                     <input onChange={handleChange} type="text" name="phone" placeholder='Phone' value={form.phone || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                     <button type="submit" className='w-full md:w-[140px] mt-[16px] mb-[12px] px-[32px] py-[12px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]'>
                                         {loading ?  (<div className='loader-button'></div>) : ('Send order')}
