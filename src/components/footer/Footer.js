@@ -38,11 +38,13 @@ function Footer() {
           </div>
           <div className={`h-[190px] md:h-auto transition-[height] duration-[500ms] ease-in-out overflow-hidden ${subscribe.height}`}>
             <p className="text-[#666666] py-[20px]">Enter your email below to be the first to know about new collections and product launches.</p>
-            <div className="flex py-[10px] border-b-[2px] border-b-[#666666] justify-between">
-              <input type="email" name="" id="" placeholder="Enter you email" className="border-0 outline-0 bg-transparent"/>
-              <button type="submit" className="border-0 bg-transparent text-[#666666]">
-                <FontAwesomeIcon icon={faArrowRight} className='ml-[20px]'/>
-              </button>
+            <div className="py-[10px] border-b-[2px] border-b-[#666666]">
+              <form className='flex justify-between'>
+                <input type="email" name="email" placeholder="Enter you email" className="border-0 outline-0 bg-transparent"/>
+                <button type="submit" className="border-0 bg-transparent text-[#666666]">
+                  <FontAwesomeIcon icon={faArrowRight} className='ml-[20px]'/>
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -52,15 +54,15 @@ function Footer() {
             <FontAwesomeIcon icon={support.icon} className='text-[15px] md:hidden'/>
           </div>
           <div className={`h-[112px] md:h-auto transition-[height] duration-[500ms] ease-in-out overflow-hidden ${support.height}`}>
-            <Link exact to="/" className='text-[#666666] block pt-[15px] pb-[5px] relative' onMouseEnter={() => setborder({shopping:'!w-[65px]'})} onMouseLeave={() => setborder({shopping:''})}>
+            <Link to="/" className='text-[#666666] block pt-[15px] pb-[5px] relative' onMouseEnter={() => setborder({shopping:'!w-[65px]'})} onMouseLeave={() => setborder({shopping:''})}>
               Shopping
               <div className={`absolute bottom-[0px] border-b-[1px] border-black transition-[width] ease-in-out duration-[500ms] w-0 ${border.shopping}`}></div>
             </Link>
-            <Link exact to="/terms-conditions" className='text-[#666666] block py-[5px] relative' onMouseEnter={() => setborder({terms:'!w-[140px]'})} onMouseLeave={() => setborder({terms:''})}>
+            <Link to="/terms-conditions" className='text-[#666666] block py-[5px] relative' onMouseEnter={() => setborder({terms:'!w-[140px]'})} onMouseLeave={() => setborder({terms:''})}>
               Terms & Conditions
               <div className={`absolute bottom-[0px] border-b-[1px] border-black transition-[width] ease-in-out duration-[500ms] w-0 ${border.terms}`}></div>
             </Link>
-            <Link exact to="/" className='text-[#666666] block py-[5px] relative' onMouseEnter={() => setborder({contact:'!w-[55px]'})} onMouseLeave={() => setborder({contact:''})}>
+            <Link to="/" className='text-[#666666] block py-[5px] relative' onMouseEnter={() => setborder({contact:'!w-[55px]'})} onMouseLeave={() => setborder({contact:''})}>
               Contant
               <div className={`absolute bottom-[0px] border-b-[1px] border-black transition-[width] ease-in-out duration-[500ms] w-0 ${border.contact}`}></div>
             </Link>

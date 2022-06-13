@@ -44,7 +44,7 @@ const QuikViewProduct = () => {
             <div className='w-full h-auto absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] p-6 bg-white w-[960px] grid grid-cols-2 shadow-prd overflow-y-auto overflow-x-hidden'>
                 <Carousel images={images} />
                 <div className='w-full px-8'>
-                    <Link exact to={`/products/${data.nom}`} onClick={()=>hide()} className='text-[1.2rem] text-gray-700 font-bold'>{data.nom}</Link>
+                    <Link to={`/products/${data.nom}`} onClick={()=>hide()} className='text-[1.2rem] text-gray-700 font-bold'>{data.nom}</Link>
                     <p className='text-[1.2rem] text-gray-700 py-[10px]'>£{data.price}</p>
                     
                     <h3 className='font-bold my-[10px]'>British Honey Duo: Oxfordshire & Shropshire Creamed</h3>
@@ -55,7 +55,7 @@ const QuikViewProduct = () => {
                     <div className="flex flex-wrap items-center">
                         <div className='w-[130px] mr-[20px] flex border-[1.5px] border-gray rounded items-center'>
                             <button className="w-[44px] h-[44px] text-[19px]" onClick={()=>setquantityVal('-')}>-</button>
-                            <input className="py-[4px] w-[40px] text-center bg-transparent" type="text" value={quantity.val} />
+                            <input className="py-[4px] w-[40px] text-center bg-transparent" type="text" value={quantity.val || 1} />
                             <button className="w-[44px] h-[44px] text-[19px]" onClick={()=>setquantityVal('+')}>+</button>
                         </div>
                         <button onClick={()=>addProduct(data)} className="grow bg-black text-white text-[.9rem] p-[12px] rounded-[5px]">Add to cart</button>

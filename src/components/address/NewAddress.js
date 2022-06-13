@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert'
 
@@ -8,43 +8,35 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 import Menu from './Menu';
 
-import { updateAddress } from '../../actions/address';
-import { getUserAddress } from '../../actions/address';
-import { getAllCountries, getStates } from '../../actions/countryState';
+import { insertAddress } from '../../actions/address';
+import { getAllCountries,getStates } from '../../actions/countryState';
 
+const NewAddress = () => {
 
-const AddressForm = () => {
-
-    let { id } = useParams();
-
-    const {address} = useSelector((state) => state.addresses);
     const {countries,states} = useSelector((state) => state.countryState);
     const {message, loading} = useSelector((state) => state.message);
     const dispatch = useDispatch();
-    const location = useLocation();
     const alert = useAlert();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [stateArray, setstateArray] = useState([]);
     const [form, setForm] = useState([]);
 
     useEffect(() => {
-        dispatch(getUserAddress(id));
+        setForm({ ...form, 
+            firstname: '',
+            lastname: '',
+            address1: '',
+            address2: '',
+            country: 'DZ',
+            state: '01',
+            city: '',
+            zipcode: '',
+            phone: ''
+        });
         dispatch(getAllCountries());
     }, [location])
-    
-    useEffect(() => {
-        setForm({ ...form, 
-            firstname: address.firstname,
-            lastname: address.lastname,
-            address1: address.address1,
-            address2: address.address2,
-            country: (address.country ? address.country : 'DZ'),
-            state: (address.state ? address.state : '01' ),
-            city: address.city,
-            zipcode: address.zipcode,
-            phone: address.phone
-        });
-    }, [address])
 
     useEffect(() => {
         if (message !== '') {
@@ -54,29 +46,31 @@ const AddressForm = () => {
 
     useEffect(() => {
         if (countries.length > 0) {
-            if (address.country) {
-                document.getElementById(address.country).selected = 'selected'
-            }
-            else{
-                document.getElementById('DZ').selected = 'selected'
-            }
-            dispatch(getStates(address.country));
+            document.getElementById('DZ').selected = 'selected';
+            dispatch(getStates('DZ'));
         }
-    }, [countries,address])
+    }, [countries])
 
-    useEffect(() => {
-        dispatch(getStates(form.country));
-    }, [form.country])
-    
     useEffect(() => {
         if (states.length > 0) {
             setstateArray(states)
         }
     }, [states])
 
-    const handleSubmit = (id) => (e) => {
+    useEffect(() => {
+        dispatch(getStates(form.country));
+    }, [form.country])
+
+    const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(updateAddress(id,form))
+        if (form.firstname === '') {alert.error('Enter your firstname please',{ timeout: 4000})}
+        else if (form.lastname === '') {alert.error('Enter your lastname please',{ timeout: 4000})}
+        else if (form.address1 === '') {alert.error('Enter your address please',{ timeout: 4000})}
+        else if (form.code === '') {alert.error('Enter your Zip code please',{ timeout: 4000})}
+        else if (form.phone === '') {alert.error('Enter your phone please',{ timeout: 4000})}
+        else {
+            dispatch(insertAddress(form,navigate))
+        }
     }
     
     const handleChange = (e) => {setForm({ ...form, [e.target.name]: e.target.value });}
@@ -91,8 +85,8 @@ const AddressForm = () => {
         }
     }
 
-    if (!address || countries.length == 0) {
-        return (
+    if (countries.length == 0) {
+        return(
             <>
                 <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
                     <div className='w-[200px] h-[30px] mx-auto rounded-[15px] bg-[#ecedee]'></div>
@@ -152,9 +146,9 @@ const AddressForm = () => {
             <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
                 <Menu />
                 <div className="px-4 md:px-8 xl:px-16 2xl:px-24 w-full md:w-5/6">
-                    <h3 className='text-[1.3rem] font-bold'>Update address</h3>
+                    <h3 className='text-[1.3rem] font-bold'>Add a new address</h3>
                     <div className="m-[2rem_0]">    
-                        <form onSubmit={handleSubmit(id)}>
+                        <form onSubmit={handleSubmit}>
                             <div className='mb-[1.5rem]'>
                                 <label htmlFor="">First Name</label>
                                 <input className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' onChange={handleChange} type="text" name='firstname' value={form.firstname || ''} placeholder='First Name' autoComplete='off'/>
@@ -213,7 +207,7 @@ const AddressForm = () => {
                             </div>
                             <div className='flex items-center mt-[30px]'>
                                 <button type='submit' className='px-[32px] py-[10px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] w-auto inline-block hover:outline-[3px]'>
-                                    {loading ?  (<div className='loader-button'></div>) : ('Update address')}
+                                    {loading ?  (<div className='loader-button'></div>) : ('Save address')}
                                 </button>
                                 <Link to='/account/addresses' className='ml-[30px]'>Cancel</Link>
                             </div>
@@ -225,4 +219,4 @@ const AddressForm = () => {
     )
 }
 
-export default AddressForm
+export default NewAddress

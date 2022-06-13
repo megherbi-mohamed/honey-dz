@@ -11,13 +11,16 @@ API.interceptors.request.use((req) => {
 
 export const getAllProducts = () => API.get(`/products`);
 export const getCategoryProducts = (category) => API.get(`/products/category?category=${category}`);
-export const getProduct = (name) => API.get(`/products/name?name=${name}`);
+export const getProduct = (id) => API.get(`/products/${id}`);
+
+export const getUserCommandes = () => API.get(`/commande`);
 export const insertCommande = (formData) => API.post(`/commande`,formData);
 
 export const getUserAddresses = () => API.get(`/address`);
 export const getUserAddress = (id) => API.get(`/address/${id}`);
 export const insertAddress = (formData) => API.post(`/address`,formData);
 export const updateAddress = (id,formData) => API.patch(`/address/${id}`,formData);
+export const deleteUserAddress = (id) => API.delete(`/address/${id}`);
 
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);

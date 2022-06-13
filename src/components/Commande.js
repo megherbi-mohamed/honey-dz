@@ -9,47 +9,78 @@ import decode from 'jwt-decode';
 
 import * as actionType from '../constants/actionTypes';
 import { insertCommande } from '../actions/commande';
+import { getUserAddresses,getUserAddress } from '../actions/address';
+import { getAllCountries, getStates } from '../actions/countryState';
 
 const Commande = () => {
 
-    const loading = useSelector((state) => state.loading);
+    const {addresses,address} = useSelector((state) => state.addresses);
+    const {countries,states} = useSelector((state) => state.countryState);
+    const {loading,message} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    const alert = useAlert()
+    const alert = useAlert();
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const user = JSON.parse(localStorage.getItem('profile'));
+    const [stateArray, setstateArray] = useState([]);
+    const [form, setForm] = useState([])
 
     const logout = () => {
         dispatch({ type: actionType.LOGOUT });
         navigate('/account');
-        setUser(null);
     };
 
     useEffect(() => {
-        const token = user?.token;
-        if (token) {
-            const decodedToken = decode(token);
-            if (decodedToken.exp*1000  < new Date().getTime()) logout();
+        dispatch(getUserAddresses());
+        dispatch(getAllCountries());
+    }, [location])
+
+    useEffect(() => {
+        if (addresses.length > 0) {
+            dispatch(getUserAddress(addresses[0]._id));
         }
-        else{  navigate('/account') }
+    }, [addresses])
+    
+    useEffect(() => {
         setForm({ ...form, 
-            firstname:user?.result.firstname, 
-            lastname:user?.result.lastname,
-            address1:user?.result.address1,
-            address2:user?.result.address2,
-            country:user?.result.country,
-            city:user?.result.city,
-            common:user?.result.common,
-            zipcode:user?.result.zipcode,
-            phone:user?.result.phone
+            firstname: address.firstname,
+            lastname: address.lastname,
+            address1: address.address1,
+            address2: address.address2,
+            country: (address.country ? address.country : 'DZ'),
+            state: (address.state ? address.state : '01' ),
+            city: address.city,
+            zipcode: address.zipcode,
+            phone: address.phone
         });
-    }, [location]);
+    }, [address])
+    
+    useEffect(async () => {
+        if (countries.length > 0) {
+            if (countries.length > 0) {
+                if (address.country) {
+                    document.getElementById(address.country).selected = 'selected'
+                }
+                else{
+                    document.getElementById('DZ').selected = 'selected'
+                }
+                dispatch(getStates(address.country));
+            }
+        }
+    }, [countries,addresses,address])
+    
+    useEffect(() => {
+        if (states.length > 0) {
+            setstateArray(states)
+        }
+    }, [states])
 
     const { 
         items, 
         cartTotal, 
-        removeItem
+        removeItem,
+        isEmpty
     } = useCart()
 
     function setFacture(data) {
@@ -72,10 +103,12 @@ const Commande = () => {
         return tableData;
     }
 
-    const initialState = { firstname:'', lastname:'', address1:'', address2:'', country:'', city:'', common:'', code:'',phone:'' }
-    const [form, setForm] = useState(initialState)
+    useEffect(() => {
+        dispatch(getStates(form.country));
+    }, [form.country])
 
     let formData = {commande:form,produits:setitems(items),facture:setFacture(items)}
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (form.firstname === '') {alert.error('Enter your firstname please',{ timeout: 4000})}
@@ -87,6 +120,12 @@ const Commande = () => {
             dispatch(insertCommande(formData,navigate))
         }
     }
+
+    useEffect(() => {
+        if (message !== '') {
+            alert.success(message,{ timeout: 2000})
+        }
+    }, [message])
     
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -98,6 +137,14 @@ const Commande = () => {
         setclickCart((prev) => prev + 1)
         if (clickCart%2 === 0) {setcart({icon:'rotate-[180deg]',height:'!max-h-[1000px]'})}
         else {setcart(init)}
+    }
+
+    if (!address || addresses.length == 0 || countries.length == 0) {
+        return <div className='mt-[100px]'>loading</div>
+    }
+
+    if (isEmpty) {
+        navigate('/account')
     }
     
     return (
@@ -160,7 +207,7 @@ const Commande = () => {
                                     <img className='w-[50px] h-[50px] rounded-[8px]' src="/images/Ldn_300x300.webp" alt="" />
                                     <div className='ml-[10px]'>
                                         <p className='text-gray-500 text-[0.9rem]'>megherbi mohamed (megherbimeddz@gmail.com)</p>
-                                        <button className='border-0 outline-0 bg-transparent text-[#bd8c27]'>Logout</button>
+                                        <button onClick={logout} className='border-0 outline-0 bg-transparent text-[#bd8c27]'>Logout</button>
                                     </div>
                                 </div>
                                 <div className='flex items-center my-[20px]'>
@@ -170,48 +217,58 @@ const Commande = () => {
                                 <form onSubmit={handleSubmit}>
                                     <div className='w-full relative'>
                                         <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Saved addresses</span>
-                                        <div class="select-wrapper">
+                                        <div className="select-wrapper">
                                             <select className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
-                                                <option value="Algérie (megherbi mohamed)">Algérie (megherbi mohamed)</option>
-                                                <option value="Use a new address">Use a new address</option>
+                                                {addresses ?
+                                                    addresses.map((address,index) => (
+                                                        <option key={index} value={address._id}>{address.country+' '+'('+address.firstname+' '+address.lastname+')'}</option>
+                                                    )) : null
+                                                }
+                                                <option value="new">Use a new address</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div className='w-full grid grid-cols-2 gap-[15px] mt-[10px]'>
-                                        <input onChange={handleChange} type="text" name="firstname" placeholder='First name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
-                                        <input onChange={handleChange} type="text" name="lastname" placeholder='last name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                        <input onChange={handleChange} type="text" name="firstname" value={form.firstname || ''} autoComplete="off" placeholder='First name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                        <input onChange={handleChange} type="text" name="lastname" value={form.lastname || ''} autoComplete="off" placeholder='last name' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                     </div>
-                                    <input onChange={handleChange} type="text" name="address1" placeholder='Addess' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
-                                    <input onChange={handleChange} type="text" name="address2" placeholder='Apartement, suite, etc. (optional)' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    <input onChange={handleChange} type="text" name="address1" placeholder='Addess' value={form.address1 || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    <input onChange={handleChange} type="text" name="address2" placeholder='Apartement, suite, etc. (optional)' value={form.address2 || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                     <div className='w-full grid grid-cols-3 gap-[15px] mt-[5px]'>
                                         <div className='w-full relative'>
                                             <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Country/Region</span>
-                                            <div class="select-wrapper">
-                                                <select onChange={handleChange} name="country" className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
-                                                    <option value="Algérie">Algérie</option>
-                                                    <option value="France">France</option>
+                                            <div className="select-wrapper">
+                                                <select onChange={handleChange} name="country" id='country' className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
+                                                    {countries ?
+                                                        countries.map((country,index)=>(
+                                                            <option key={index} id={country.isoCode} value={country.isoCode}>{country.name}</option>
+                                                        ))
+                                                        :
+                                                        <option value="">vide</option>
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="select-wrapper">
-                                            <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>City</span>
-                                            <select onChange={handleChange} name="city" className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
-                                                <option value="Alger">Alger</option>
-                                                <option value="Oran">Oran</option>
+                                        <div className="select-wrapper">
+                                            <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>State</span>
+                                            <select onChange={handleChange} name="state" className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
+                                                {stateArray ?
+                                                    stateArray.map((state,index)=>(
+                                                        <option key={index} id={state.isoCode} value={state.isoCode}>{state.name}</option>
+                                                    ))
+                                                    :
+                                                    <option value="">vide</option>
+                                                }
                                             </select>
                                         </div>
-                                        <div class="select-wrapper">
-                                            <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Common</span>
-                                            <select onChange={handleChange} name="common" className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
-                                                <option value="Alger">Alger</option>
-                                                <option value="Oran">Oran</option>
-                                            </select>
+                                        <div className="select-wrapper">
+                                            <input onChange={handleChange} type="text" name="city" placeholder='City' value={form.city || ''} autoComplete="off" className='px-[12px] py-[12px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                         </div>
                                     </div>
-                                    <input onChange={handleChange} type="text" name="code" placeholder='Zip code' className='mt-[15px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
-                                    <input onChange={handleChange} type="text" name="phone" placeholder='Phone' className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    <input onChange={handleChange} type="text" name="code" placeholder='Zip code' value={form.zipcode || ''} autoComplete="off" className='mt-[15px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    <input onChange={handleChange} type="text" name="phone" placeholder='Phone' value={form.phone || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                                     <button type="submit" className='w-full md:w-[140px] mt-[16px] mb-[12px] px-[32px] py-[12px] bg-[#bd8c27] text-white text-sm block rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]'>
-                                        {loading.button ?  (<div className='loader-button'></div>) : ('Send order')}
+                                        {loading ?  (<div className='loader-button'></div>) : ('Send order')}
                                     </button>
                                 </form>
                             </div>

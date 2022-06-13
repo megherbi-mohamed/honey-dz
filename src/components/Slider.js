@@ -92,7 +92,7 @@ export default function Slider(props) {
                     {images.map(function(image,i){
                         let button = 'button'+i
                         return (
-                        <div className="svg-wrapper" onClick={() => moveDot(i + 1)}>
+                        <div key={i} className="svg-wrapper" onClick={() => moveDot(i + 1)}>
                             <svg height="40" width="40" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="20" cy="20" r="10" className={slideIndex === i + 1 ? "shape shape-active" : "shape"} height="10" width="10"></circle>
                             </svg>

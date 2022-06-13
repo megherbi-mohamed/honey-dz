@@ -18,10 +18,10 @@ export const getCategoryProducts = (category) => async (dispatch) => {
   }
 };
 
-export const getProduct = (name) => async (dispatch) => {
+export const getProduct = (id) => async (dispatch) => {
   try {
-    const { data } = await api.getProduct(name);
-    const product = [{id:data[0]._id,front:data[0].front,side:data[0].side,nom:data[0].nom,price:data[0].prix,color:data[0].color,size:''}];
+    const { data } = await api.getProduct(id);
+    const product = [{id:data._id,front:data.front,side:data.side,nom:data.nom,price:data.prix,color:data.color,size:''}];
     dispatch({ type: "GET_PRODUCT", payload: product });
   } catch (error) {
     console.log(error.message);

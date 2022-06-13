@@ -1,4 +1,4 @@
-let init = [{quickViewProduct:'',hideBody:'',cart:'',sideFilter:'',sideBar:'',sideAccount:'',login:'',register:'',loginContainer:'',registerContainer:'',carouselOverview:'',askQuestion:''}]
+let init = [{quickViewProduct:'',hideBody:'',cart:'',sideFilter:'',sideBar:'',sideAccount:'',login:'',register:'',loginContainer:'',registerContainer:'',carouselOverview:'',askQuestion:'',confirmation:''}]
 export default (display = init, action) => {
     switch (action.type) {
         case 'display':

@@ -1,12 +1,14 @@
 import React, {useState,useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch,useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleUp, faBars } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 
 const Navbar = () => {
+
+    const user = JSON.parse(localStorage.getItem('profile'));
 
     const [icon, seticon] = useState(faAngleDown)
     const [homeBorder, sethomeBorder] = useState('')
@@ -55,31 +57,33 @@ const Navbar = () => {
                     <div className="flex items-center">
                         <svg onClick={()=>displaySideBar()} className="w-[20px] h-[55px] lg:hidden" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M442 114H6a6 6 0 0 1-6-6V84a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6z"></path>
-                        </svg>      
-                        <Link exact to="/collections/swimwear" className="items-center relative hidden lg:flex" onMouseEnter={() => {sethomeBorder('!w-[40px]');seticon(faAngleUp);setdropDown('!visible !translate-y-[0] !opacity-100')}} onMouseLeave={() => {sethomeBorder('');seticon(faAngleDown);setdropDown('')}}>
-                            <h4 className="mr-[10px] text-[#bd8c27] py-[20px] pl-[16px]" onClick={()=>setdropDown('')}>SHOP</h4>
-                            <FontAwesomeIcon icon={icon} className="text-[10px] text-[#bd8c27]" />
-                            <div className={`absolute bottom-[13px] left-[16px] border-b-2 border-[#bd8c27] transition-[width] ease-in-out duration-500 w-0 ${homeBorder}`}></div>
+                        </svg> 
+                        <div className='relative' onMouseEnter={() => {sethomeBorder('!w-[40px]');seticon(faAngleUp);setdropDown('!visible !translate-y-[0] !opacity-100')}} onMouseLeave={() => {sethomeBorder('');seticon(faAngleDown);setdropDown('')}}>
+                            <Link to="/collections/swimwear" className="items-center relative hidden lg:flex">
+                                <h4 className="mr-[10px] text-[#bd8c27] py-[20px] pl-[16px]" onClick={()=>setdropDown('')}>SHOP</h4>
+                                <FontAwesomeIcon icon={icon} className="text-[10px] text-[#bd8c27]" />
+                                <div className={`absolute bottom-[13px] left-[16px] border-b-2 border-[#bd8c27] transition-[width] ease-in-out duration-500 w-0 ${homeBorder}`}></div>
+                            </Link>
                             <div className={`absolute z-10 w-[250px] text-[#bd8c27] top-[60px] invisible opacity-0 translate-y-[20px] transition ease-in-out duration-500 p-[15px] bg-white flex flex-col drop-shadow-sm ${dropDown}`}>
-                                <Link exact to="/collections/honey" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>HONEY</Link>
-                                <Link exact to="/collections/honeycomb" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>HONEYCOMB</Link>
-                                <Link exact to="/collections/gifts" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>GIFTS</Link>
-                                <Link exact to="/collections/candles" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>CANDLES</Link>
-                                <Link exact to="/collections/courses" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>COURSES</Link>
+                                <Link to="/collections/honey" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>HONEY</Link>
+                                <Link to="/collections/honeycomb" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>HONEYCOMB</Link>
+                                <Link to="/collections/gifts" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>GIFTS</Link>
+                                <Link to="/collections/candles" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>CANDLES</Link>
+                                <Link to="/collections/courses" className="p-[10px] hover:bg-[#f8f8f8]" onClick={()=>setdropDown('')}>COURSES</Link>
                             </div>
-                        </Link>
-                        <Link exact to="/about" className="relative" onMouseEnter={() => setaboutBorder('!w-[50px]')} onMouseLeave={() => setaboutBorder('')}>
+                        </div>
+                        <Link to="/about" className="relative" onMouseEnter={() => setaboutBorder('!w-[50px]')} onMouseLeave={() => setaboutBorder('')}>
                             <h4 className="ml-[15px] text-[#bd8c27] py-[20px] px-[16px] hidden lg:block">ABOUT</h4>
                             <div className={`absolute bottom-[13px] left-[31px] border-b-2 border-[#bd8c27] transition-[width] ease-in-out duration-500 w-0 ${aboutBorder}`}></div>
                         </Link>
                     </div>
                     <div className="relative">
-                        <Link exact to="/">
+                        <Link to="/">
                             <img src="/images/logo.webp" alt="" className="w-[190px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                         </Link>
                     </div>
                     <div className="flex items-center justify-end">
-                        <Link exact to="/account" className="hidden lg:block py-[14px] px-[13px]">
+                        <Link to={user ? '/account' : '/account/signin'} className="hidden lg:block py-[14px] px-[13px]">
                             <FontAwesomeIcon icon={faUser} className="text-[13px] text-[#bd8c27] w-[20px] h-[13px]" />
                         </Link>
                         <div className="relative flex items-end py-[8px] pl-[13px] pr-[6px] md:px-[13px]">

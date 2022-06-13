@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useAlert } from 'react-alert'
 
-import { signup } from '../actions/auth';
+import { signup } from '../../actions/auth';
 
 const Register = () => {
 
@@ -60,7 +60,7 @@ const Register = () => {
                             {loading ?  (<div className='loader-button'></div>) : ('Register')}
                         </button>
                     </form>
-                    <Link className="py-[10px] bg-transparent text-[#bd8c27] text-sm text-center rounded-[5px] transition-[outline] duration-600 ease-in-out border border-[#bd8c27] outline outline-0 outline-[#bd8c27] inline-block w-full hover:outline-[3px] hover:bg-[#bd8c27] hover:text-white" to="/account">Login</Link>
+                    <Link className="py-[10px] bg-transparent text-[#bd8c27] text-sm text-center rounded-[5px] transition-[outline] duration-600 ease-in-out border border-[#bd8c27] outline outline-0 outline-[#bd8c27] inline-block w-full hover:outline-[3px] hover:bg-[#bd8c27] hover:text-white" to="/account/signin">Login</Link>
                 </div>
             </div>
         </>
