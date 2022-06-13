@@ -5,11 +5,10 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { useCart } from 'react-use-cart'
 import { useAlert } from 'react-alert'
-import decode from 'jwt-decode';
 
 import * as actionType from '../constants/actionTypes';
 import { insertCommande } from '../actions/commande';
-import { getUserAddresses,getUserAddress } from '../actions/address';
+import { getUserAddresses } from '../actions/address';
 import { getAllCountries, getStates } from '../actions/countryState';
 
 const Commande = () => {
