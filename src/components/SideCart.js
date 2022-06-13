@@ -32,15 +32,15 @@ const SideCart = () => {
                     <h3 className="text-black text-[1.2rem]">Shopping Cart</h3>
                     <FontAwesomeIcon icon={faXmark} className="text-[20px] text-[#626262] cursor-pointer" onClick={()=>hide()}/>
                 </div>
-                <div className={`px-[24px] h-[calc(100vh-275px)] md:h-[calc(100vh-300px)] overflow-y-auto ${transform.after}`}>
+                <div className={`px-[15px] md:px-[24px] h-[calc(100vh-275px)] md:h-[calc(100vh-300px)] overflow-y-auto overflow-x-hidden ${transform.after}`}>
                     {isEmpty ? <span>Your cart is currently empty.</span> : (
                         items.map((item, index) => (
                             <div className="flex py-[12px]" key={index}>
                                 <Link onClick={()=>hide()} to={'/products/'+item.nom}>
-                                    <img src={'/images/'+item.side} className="min-w-[108px] max-w-[108px] border-[1px] border-[#dedede]" alt="" />
+                                    <img src={'/images/'+item.side} className="min-w-[100px] max-w-[100px] border-[1px] border-[#dedede]" alt="" />
                                 </Link>
-                                <div className="px-[20px]">
-                                    <Link onClick={()=>hide()} to={'/products/'+item.nom} className="text-[16px]">{item.nom}</Link>
+                                <div className="px-[15px] md:px-[20px]">
+                                    <Link onClick={()=>hide()} to={'/products/'+item.nom} className="text-[14px] md:text-[16px]">{item.nom}</Link>
                                     <h3>{'£'+item.price}</h3>
                                     <div className="flex items-end">
                                         <div className='flex items-center bg-[#f1f1f1] rounded-[3px] mt-[10px]'>
