@@ -31,7 +31,9 @@ const Home = () => {
     // },[location])
 
     useEffect(() => {
-        dispatch(getAllProducts());
+        // if (products.length === 0) {
+            dispatch(getAllProducts());
+        // }
     },[])
     
     // if (products.length === 0) {
