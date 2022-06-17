@@ -101,7 +101,7 @@ const Commande = () => {
             }
         }
     }, [countries,addresses])
-    
+
     useEffect(() => {
         if (states.length > 0) {
             setstateArray(states)
@@ -115,21 +115,21 @@ const Commande = () => {
         isEmpty
     } = useCart()
 
-    function setFacture(data) {
+    function setFacture(data,product) {
         let tableData = [];
         for (const d of data) {
             tableData.push(
-                { designation: d.nom, prixUnitaire: d.price, quantity: d.quantity }
+                { designation: d.nom, prixUnitaire: d.price, quantity: product ? parseInt(quantity) : d.quantity }
             );
         }
         return tableData;
     }
 
-    function setitems(data) {
+    function setitems(data,product) {
         let tableData = [];
         for (const d of data) {
             tableData.push(
-                { prd: d.id, quantity: d.quantity }
+                { prd: d.id, quantity: product ? parseInt(quantity) : d.quantity }
             );
         }
         return tableData;
@@ -139,7 +139,7 @@ const Commande = () => {
         dispatch(getStates(form.country));
     }, [form.country])
 
-    let formData = {commande:form,produits:setitems(items),facture:setFacture(items)}
+    let formData = {commande:form, produits: id ? setitems(product,true) : setitems(items,false), facture: id ? setFacture(product,true) : setFacture(items,false)}
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -150,6 +150,7 @@ const Commande = () => {
         else if (form.phone === '') {alert.error('Enter your phone please',{ timeout: 4000})}
         else {
             dispatch(insertCommande(formData,navigate))
+            
         }
     }
 
