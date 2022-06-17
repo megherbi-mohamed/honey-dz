@@ -7,6 +7,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const SideCart = () => {
 
+    const user = JSON.parse(localStorage.getItem('profile'));
+
     const display = useSelector((state) => state.display);
     const dispatch = useDispatch();
     const hide = () => {
@@ -73,7 +75,7 @@ const SideCart = () => {
                                 <span className="text-[18px]">{'$'+cartTotal}</span>
                             </div>
                             <div className="flex flex-col items-center">
-                                <Link to="/commande" onClick={()=>hide()} className="mt-[16px] mb-[12px] px-[32px] py-[11px] bg-[#bd8c27] text-white text-center text-sm block w-full rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]">Check out</Link>
+                                <Link to={user ? '/commande' : '/account/signin'} onClick={()=>hide()} className="mt-[16px] mb-[12px] px-[32px] py-[11px] bg-[#bd8c27] text-white text-center text-sm block w-full rounded-[5px] transition-[outline] duration-600 ease-in-out outline outline-0 outline-[#bd8c27] hover:outline-[3px]">Check out</Link>
                                 <Link className="underline text-[16px]" to='/cart' onClick={()=>hide()}>View Cart</Link>
                             </div>
                         </div>

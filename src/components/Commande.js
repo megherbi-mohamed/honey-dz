@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +10,14 @@ import * as actionType from '../constants/actionTypes';
 import { insertCommande } from '../actions/commande';
 import { getUserAddresses } from '../actions/address';
 import { getAllCountries, getStates } from '../actions/countryState';
+import { getProduct } from '../actions/products';
 
 const Commande = () => {
 
+    const {id,quantity} = useParams();
+
     const {addresses} = useSelector((state) => state.addresses);
+    const {product} = useSelector((state) => state.products);
     const {countries,states} = useSelector((state) => state.countryState);
     const {loading,message} = useSelector((state) => state.message);
     const dispatch = useDispatch();
@@ -33,6 +37,9 @@ const Commande = () => {
     useEffect(() => {
         dispatch(getUserAddresses());
         dispatch(getAllCountries());
+        if (id) {
+            dispatch(getProduct(id));
+        }
     }, [location])
 
     useEffect(() => {
@@ -164,9 +171,9 @@ const Commande = () => {
         else {setcart(init)}
     }
 
-    if (addresses.length === 0 || countries.length === 0) {
-        return <div className='mt-[100px]'>loading</div>
-    }
+    // if (addresses.length === 0 || countries.length === 0) {
+    //     return <div className='mt-[100px]'>loading</div>
+    // }
 
     if (!user) {
         navigate('/account/signin')
@@ -189,37 +196,72 @@ const Commande = () => {
                         </div>
                         <div className={`px-[20px] max-h-0 overflow-hidden transition-[max-height] duration-[500ms] ease-in-out ${cart.height}`}>
                             <div className='w-full pt-[10px]'></div>
-                            {items.map((item, index) => (
-                                <div className="flex py-[12px] w-full" key={index}>
-                                    <div className='relative'>
-                                        <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
-                                        <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
-                                            <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
+                            {id && quantity && product.length > 0 ? 
+                                <>
+                                    <div className="flex py-[12px] w-full">
+                                        <div className='relative'>
+                                            <img src={'/images/'+product[0].side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
+                                            <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
+                                                <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{quantity}</span>
+                                            </div>
+                                        </div>
+                                        <div className="pl-[20px] w-full flex items-center justify-between">
+                                            <h2 className='text-[0.9rem] mr-[20px]'>{product[0].nom}</h2>
+                                            <div className='text-right'>
+                                                <h3>{'£'+product[0].price}</h3>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="pl-[20px] w-full flex items-center justify-between">
-                                        <h2 className='text-[0.9rem] mr-[20px]'>{item.nom}</h2>
-                                        <div className='text-right'>
-                                            <h3>{'£'+item.price}</h3>
-                                            <button className="bg-transparent border-0 underline py-[8px] pl-[8px] ml-[8px] text-[14px]" onClick={()=>removeItem(item.id)}>Remove</button>
+                                    <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                        <div className='mb-[10px] flex items-center justify-between'>
+                                            <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
+                                            <span className='font-bold text-[0.9rem]'>{'£'+(product[0].price*quantity)}</span>
+                                        </div>
+                                        <div className='flex items-center justify-between'>
+                                            <p className='text-[0.8rem] text-gray-600'>Shipping</p>
+                                            <span className='font-bold text-[0.9rem]'>£5</span>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
-                            <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
-                                <div className='mb-[10px] flex items-center justify-between'>
-                                    <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
-                                    <span className='font-bold text-[0.9rem]'>{'£'+cartTotal}</span>
-                                </div>
-                                <div className='flex items-center justify-between'>
-                                    <p className='text-[0.8rem] text-gray-600'>Shipping</p>
-                                    <span className='font-bold text-[0.9rem]'>£5</span>
-                                </div>
-                            </div>
-                            <div className='mt-[20px] flex items-center justify-between'>
-                                <h3 className='text font-bold text-[1.1rem]'>Total</h3>
-                                <span className='font-bold text-[1.2rem]'>{'£'+(cartTotal+5)}</span>
-                            </div>
+                                    <div className='mt-[20px] flex items-center justify-between'>
+                                        <h3 className='text font-bold text-[1.1rem]'>Total</h3>
+                                        <span className='font-bold text-[1.2rem]'>{'£'+((product[0].price*quantity)+5)}</span>
+                                    </div>
+                                </>
+                                :
+                                items.map((item, index) => (
+                                    <>
+                                        <div className="flex py-[12px] w-full" key={index}>
+                                            <div className='relative'>
+                                                <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
+                                                <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
+                                                    <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
+                                                </div>
+                                            </div>
+                                            <div className="pl-[20px] w-full flex items-center justify-between">
+                                                <h2 className='text-[0.9rem] mr-[20px]'>{item.nom}</h2>
+                                                <div className='text-right'>
+                                                    <h3>{'£'+item.price}</h3>
+                                                    <button className="bg-transparent border-0 underline py-[8px] pl-[8px] ml-[8px] text-[14px]" onClick={()=>removeItem(item.id)}>Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                            <div className='mb-[10px] flex items-center justify-between'>
+                                                <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
+                                                <span className='font-bold text-[0.9rem]'>{'£'+cartTotal}</span>
+                                            </div>
+                                            <div className='flex items-center justify-between'>
+                                                <p className='text-[0.8rem] text-gray-600'>Shipping</p>
+                                                <span className='font-bold text-[0.9rem]'>£5</span>
+                                            </div>
+                                        </div>
+                                        <div className='mt-[20px] flex items-center justify-between'>
+                                            <h3 className='text font-bold text-[1.1rem]'>Total</h3>
+                                            <span className='font-bold text-[1.2rem]'>{'£'+(cartTotal+5)}</span>
+                                        </div>
+                                    </>
+                                ))
+                            }
                             <div className='w-full pb-[20px]'></div>
                         </div>
                     </div>
@@ -302,37 +344,72 @@ const Commande = () => {
                 </div>
                 <div className='hidden md:block w-[100vw] md:w-[40vw] bg-[#f9f9f9] min-h-[100vw] border-l-[1px] border-l-[#d3d3d3] justify-self-start'>
                     <div className='w-full w-full md:w-[30vw] md:mr-[10vw] p-[20px] md:p-[67px_73px_21px_44px]'>
-                        {items.map((item, index) => (
-                            <div className="flex py-[12px] w-full" key={index}>
-                                <div className='relative'>
-                                    <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
-                                    <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
-                                        <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
+                        {id && quantity && product.length > 0 ? 
+                            <>
+                                <div className="flex py-[12px] w-full">
+                                    <div className='relative'>
+                                        <img src={'/images/'+product[0].side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
+                                        <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
+                                            <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{quantity}</span>
+                                        </div>
+                                    </div>
+                                    <div className="pl-[20px] w-full flex items-center justify-between">
+                                        <h2 className='text-[0.9rem] mr-[20px]'>{product[0].nom}</h2>
+                                        <div className='text-right'>
+                                            <h3>{'£'+product[0].price}</h3>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="pl-[20px] w-full flex items-center justify-between">
-                                    <h2 className='text-[0.9rem] mr-[20px]'>{item.nom}</h2>
-                                    <div className='text-right'>
-                                        <h3>{'£'+item.price}</h3>
-                                        <button className="bg-transparent border-0 underline py-[8px] pl-[8px] ml-[8px] text-[14px]" onClick={()=>removeItem(item.id)}>Remove</button>
+                                <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                    <div className='mb-[10px] flex items-center justify-between'>
+                                        <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
+                                        <span className='font-bold text-[0.9rem]'>{'£'+(product[0].price*quantity)}</span>
+                                    </div>
+                                    <div className='flex items-center justify-between'>
+                                        <p className='text-[0.8rem] text-gray-600'>Shipping</p>
+                                        <span className='font-bold text-[0.9rem]'>£5</span>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-                        <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
-                            <div className='mb-[10px] flex items-center justify-between'>
-                                <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
-                                <span className='font-bold text-[0.9rem]'>{'£'+cartTotal}</span>
-                            </div>
-                            <div className='flex items-center justify-between'>
-                                <p className='text-[0.8rem] text-gray-600'>Shipping</p>
-                                <span className='font-bold text-[0.9rem]'>£5</span>
-                            </div>
-                        </div>
-                        <div className='mt-[20px] flex items-center justify-between'>
-                            <h3 className='text font-bold text-[1.1rem]'>Total</h3>
-                            <span className='font-bold text-[1.2rem]'>{'£'+(cartTotal+5)}</span>
-                        </div>
+                                <div className='mt-[20px] flex items-center justify-between'>
+                                    <h3 className='text font-bold text-[1.1rem]'>Total</h3>
+                                    <span className='font-bold text-[1.2rem]'>{'£'+((product[0].price*quantity)+5)}</span>
+                                </div>
+                            </>
+                            :
+                            items.map((item, index) => (
+                                <>
+                                    <div className="flex py-[12px] w-full" key={index}>
+                                        <div className='relative'>
+                                            <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" />
+                                            <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
+                                                <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
+                                            </div>
+                                        </div>
+                                        <div className="pl-[20px] w-full flex items-center justify-between">
+                                            <h2 className='text-[0.9rem] mr-[20px]'>{item.nom}</h2>
+                                            <div className='text-right'>
+                                                <h3>{'£'+item.price}</h3>
+                                                <button className="bg-transparent border-0 underline py-[8px] pl-[8px] ml-[8px] text-[14px]" onClick={()=>removeItem(item.id)}>Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                        <div className='mb-[10px] flex items-center justify-between'>
+                                            <p className='text-[0.8rem] text-gray-600'>Subtotal</p>
+                                            <span className='font-bold text-[0.9rem]'>{'£'+cartTotal}</span>
+                                        </div>
+                                        <div className='flex items-center justify-between'>
+                                            <p className='text-[0.8rem] text-gray-600'>Shipping</p>
+                                            <span className='font-bold text-[0.9rem]'>£5</span>
+                                        </div>
+                                    </div>
+                                    <div className='mt-[20px] flex items-center justify-between'>
+                                        <h3 className='text font-bold text-[1.1rem]'>Total</h3>
+                                        <span className='font-bold text-[1.2rem]'>{'£'+(cartTotal+5)}</span>
+                                    </div>
+                                </>
+                            ))
+                        }
                     </div>
                 </div>
             </div>

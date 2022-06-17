@@ -62,6 +62,7 @@ const App = () => {
                 <Route exact path="/cart" element={<Cart />} />
                 <Route exact path="/terms-conditions" element={<TermsConditions />} />
                 <Route exact path="/commande" element={<Commande />} />
+                <Route exact path="/commande/:id/:quantity" element={<Commande />} />
               </Routes>
             <HideBody />
             <QuikViewProduct />
