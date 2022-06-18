@@ -14,7 +14,8 @@ export const getCategoryProducts = (category) => API.get(`/products/category?cat
 export const getProduct = (id) => API.get(`/products/${id}`);
 
 export const getUserCommandes = () => API.get(`/commande`);
-export const insertCommande = (formData) => API.post(`/commande`,formData);
+export const insertOnlineCommande = (formData) => API.post(`/commande/online`,formData);
+export const insertOfflineCommande = (formData) => API.post(`/commande/offline`,formData);
 
 export const getUserAddresses = () => API.get(`/address`);
 export const getUserAddress = (id) => API.get(`/address/${id}`);
