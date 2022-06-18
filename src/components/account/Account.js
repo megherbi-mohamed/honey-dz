@@ -126,14 +126,15 @@ const Account = () => {
                         (not <span className="font-semibold">{user?.result.firstname+' '+user?.result.lastname}? </span>
                         <button onClick={logout} className='underline'>Log Out</button>)
                     </div>
-                    <div className="mb-16">
-                        <h3 className="text-2xl font-medium mb-8">Order History</h3>
+                    <div className="mb-12">
+                        <h3 className="text-2xl font-medium mb-6">Order History</h3>
                         {commandes.length > 0 ?
-                            commandes.map((commande,index) => (
-                                <div key={index}>
-                                    {commande._id}
-                                </div>
-                            ))
+                            // commandes.map((commande,index) => (
+                            //     <div key={index}>
+                            //         {commande._id}
+                            //     </div>
+                            // ))
+                            <p>You have <span className='font-bold'>{commandes.length}</span> Orders</p>
                             :
                             <div className="flex bg-[#eaf7e6] px-[12px] py-[8px]">
                                 {!isEmpty ? 
