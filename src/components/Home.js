@@ -1,7 +1,8 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getAllProducts } from '../actions/products';
+import * as api from "../api";
 
 import Product from './Product'
 
@@ -20,13 +21,20 @@ const Home = () => {
 
     const dispatch = useDispatch();
 
+    const [products, setproducts] = useState([])
+
     useEffect(() => {
         // if (products.length === 0) {
-            dispatch(getAllProducts());
+            // dispatch(getAllProducts());
         // }
+        (async () => {
+            const { data } = await api.getAllProducts();
+            setproducts(data)
+        })();
+        
     },[])
 
-    const {products} = useSelector((state) => state.products);
+    // const {products} = useSelector((state) => state.products);
     
     // if (products.length === 0) {
     //     return (
