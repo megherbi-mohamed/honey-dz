@@ -44,7 +44,7 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        <AlertProvider template={AlertTemplate} {...options}>
+        {/* <AlertProvider template={AlertTemplate} {...options}> */}
           <CartProvider>
             <Navbar />
             <ScrollTop />
@@ -76,7 +76,7 @@ const App = () => {
             <Share />
             <Footer />
           </CartProvider>
-        </AlertProvider>
+        {/* </AlertProvider> */}
       </BrowserRouter>
     </>
   )
