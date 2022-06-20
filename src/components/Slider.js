@@ -6,14 +6,17 @@ import './Slider.css'
 export default function Slider() {
 
     let images = [
-        {src: '/images/slide_1.webp',placeholder:'/images/slide_1_m.webp'},
-        {src: '/images/slide_2.webp',placeholder:'/images/slide_2_m.webp'},
-        {src: '/images/slide_3.webp',placeholder:'/images/slide_3_m.webp'},
+        {srcDesktop: '/images/slide_1_desktop.webp',srcMobile:'/images/slide_1_mobile.webp',placeholder:'/images/slide_1_progressive.webp'},
+        {srcDesktop: '/images/slide_2_desktop.webp',srcMobile:'/images/slide_2_mobile.webp',placeholder:'/images/slide_2_progressive.webp'},
+        {srcDesktop: '/images/slide_3_desktop.webp',srcMobile:'/images/slide_3_mobile.webp',placeholder:'/images/slide_3_progressive.webp'},
     ]
+
+    const width = window.innerWidth;
 
     const [slideIndex, setSlideIndex] = useState(1)
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
     const [dropDown, setdropDown] = useState(intiDropDown)
+    const breakpoint = 620;
 
     // var intervalTime = 4000;
     
@@ -88,10 +91,15 @@ export default function Slider() {
                 {images.map(function(image,i){
                     return (
                         <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                            {/* <img className='' src={image.url} alt={image.url}/> */}
-                            <ProgressiveImage src={image.src} placeholder={image.placeholder} >
-                                {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
-                            </ProgressiveImage>
+                            {width < breakpoint ?
+                                <ProgressiveImage src={image.srcMobile} placeholder={image.placeholder} >
+                                    {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
+                                </ProgressiveImage>
+                                :
+                                <ProgressiveImage src={image.srcDesktop} placeholder={image.placeholder} >
+                                    {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
+                                </ProgressiveImage>
+                            }
                         </div>
                     )
                 })}
