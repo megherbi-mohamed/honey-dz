@@ -44,7 +44,7 @@ const Commande = () => {
         }); 
     }, [location])
 
-    useEffect(async () => {
+    useEffect(() => {
         document.getElementById('DZ').selected = 'selected'
         dispatch(getStates('DZ'));
     }, [countries])
