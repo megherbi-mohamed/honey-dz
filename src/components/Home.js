@@ -6,7 +6,6 @@ import { getAllProducts } from '../actions/products';
 import './Slider.css'
 import Slider from './Slider'
 
-// import Product from './Product'
 const Product = lazy(()=> import('./Product'));
 
 const Home = () => {
@@ -24,9 +23,7 @@ const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // if (products.length === 0) {
-            dispatch(getAllProducts());
-        // }
+        dispatch(getAllProducts());
     },[])
     
     // if (products.length === 0) {
@@ -69,27 +66,10 @@ const Home = () => {
                             ))}
                         </>
                     }> 
-                    {!products.length ? 
-                        (
-                            <>
-                                {initProducts.map((index) => (
-                                    <div key={index} className='min-w-[66.66vw] md:min-w-[70%] px-[7.5px] md:w-full pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px]'>
-                                        <div className='min-w-full h-[250px] bg-[#ecedee] mb-[20px]'></div>
-                                        <div className='w-[60%] h-[20px] rounded-[20px] bg-[#ecedee] mb-[10px] mx-auto'></div>
-                                        <div className='w-[90%] h-[20px] rounded-[20px] bg-[#ecedee] mb-[10px] mx-auto'></div>
-                                        <div className='w-[40%] h-[20px] rounded-[20px] bg-[#ecedee] mb-[20px] mx-auto'></div>
-                                        <div className='w-[50px] border-[2px] border-[#ecedee] mb-[20px] mx-auto'></div>
-                                        <div className='w-[40px] h-[15px] rounded-[7.5px] bg-[#ecedee] mb-[10px] mx-auto'></div>
-                                    </div>
-                                ))}
-                            </>
-                        ) 
-                        : 
-                        (
-                            products.map((product,i) => (
-                                <Product style={{style:'min-w-[66.66vw] md:min-w-[70%] px-[7.5px]'}} key={i} id={product._id} front={product.front} side={product.side} color={product.color} nom={product.nom} price={product.prix} />
-                            ))
-                        )
+                    {products.length > 0 ?  
+                        products.map((product,i) => (
+                            <Product style={{style:'min-w-[66.66vw] md:min-w-[70%] px-[7.5px]'}} key={i} id={product._id} front={product.front} side={product.side} color={product.color} nom={product.nom} price={product.prix} />
+                        )) : null
                     }
                 </Suspense>
                 </div>

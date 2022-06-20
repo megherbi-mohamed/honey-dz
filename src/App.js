@@ -76,23 +76,23 @@ const App = () => {
       <BrowserRouter>
         <AlertProvider template={AlertTemplate} {...options}>
           <CartProvider>
-            <Suspense fallback={<>...</>}> <Navbar /> </Suspense>
-            <Suspense fallback={<>...</>}> <ScrollTop /> </Suspense>
+            <Suspense fallback={<></>}> <Navbar /> </Suspense>
+            <Suspense fallback={<></>}> <ScrollTop /> </Suspense>
             <Routes>
-              <Route exact path="/" element={ <Suspense fallback={<>...</>}><Home /></Suspense> } />
-              <Route exact path="/about" element={ <Suspense fallback={<>...</>}><About /></Suspense> } />
-              <Route exact path="/account" element={ <Suspense fallback={<>...</>}><Account /></Suspense> } />
-              <Route exact path="account/signin" element={ <Suspense fallback={<>...</>}><Signin /></Suspense> } />
-              <Route exact path="/account/register" element={ <Suspense fallback={<>...</>}><Register /></Suspense> } />
-              <Route exact path="/account/addresses" element={ <Suspense fallback={<>...</>}><Addresses /></Suspense> } />
-              <Route exact path="/account/addresses/add" element={ <Suspense fallback={<>...</>}><NewAddress /></Suspense> } />
-              <Route exact path="/account/addresses/update/:id" element={ <Suspense fallback={<>...</>}><AddressForm /></Suspense> } />
-              <Route exact path="/products/:id" element={ <Suspense fallback={<>...</>}><Products /></Suspense> } />
-              <Route exact path="/collections/:id" element={ <Suspense fallback={<>...</>}><Collections /></Suspense> } />
-              <Route exact path="/cart" element={ <Suspense fallback={<>...</>}><Cart /></Suspense> } />
-              <Route exact path="/terms-conditions" element={ <Suspense fallback={<>...</>}><TermsConditions /></Suspense> } />
-              <Route exact path="/commande/:type" element={ <Suspense fallback={<>...</>}><Commande /></Suspense> } />
-              <Route exact path="/commande/:type/:id/:quantity" element={ <Suspense fallback={<>...</>}><Commande /></Suspense> } />
+              <Route exact path="/" element={ <Suspense fallback={<></>}><Home /></Suspense> } />
+              <Route exact path="/about" element={ <Suspense fallback={<></>}><About /></Suspense> } />
+              <Route exact path="/account" element={ <Suspense fallback={<></>}><Account /></Suspense> } />
+              <Route exact path="account/signin" element={ <Suspense fallback={<></>}><Signin /></Suspense> } />
+              <Route exact path="/account/register" element={ <Suspense fallback={<></>}><Register /></Suspense> } />
+              <Route exact path="/account/addresses" element={ <Suspense fallback={<></>}><Addresses /></Suspense> } />
+              <Route exact path="/account/addresses/add" element={ <Suspense fallback={<></>}><NewAddress /></Suspense> } />
+              <Route exact path="/account/addresses/update/:id" element={ <Suspense fallback={<></>}><AddressForm /></Suspense> } />
+              <Route exact path="/products/:id" element={ <Suspense fallback={<></>}><Products /></Suspense> } />
+              <Route exact path="/collections/:id" element={ <Suspense fallback={<></>}><Collections /></Suspense> } />
+              <Route exact path="/cart" element={ <Suspense fallback={<></>}><Cart /></Suspense> } />
+              <Route exact path="/terms-conditions" element={ <Suspense fallback={<></>}><TermsConditions /></Suspense> } />
+              <Route exact path="/commande/:type" element={ <Suspense fallback={<></>}><Commande /></Suspense> } />
+              <Route exact path="/commande/:type/:id/:quantity" element={ <Suspense fallback={<></>}><Commande /></Suspense> } />
 
               {/* <Route exact path="/about" element={<About/>} />
               <Route exact path="/account" element={<Account/>} />
@@ -109,17 +109,17 @@ const App = () => {
               <Route exact path="/commande/:type/:id/:quantity" element={<Commande />} /> */}
             
             </Routes>
-            <Suspense fallback={<>...</>}> <HideBody /> </Suspense>
-            <Suspense fallback={<>...</>}> <QuikViewProduct /> </Suspense>
-            <Suspense fallback={<>...</>}> <SideCart /> </Suspense>
-            <Suspense fallback={<>...</>}> <SideFilter /> </Suspense>
-            <Suspense fallback={<>...</>}> <SideBar /> </Suspense>
-            <Suspense fallback={<>...</>}> <SideAccount /> </Suspense>
-            <Suspense fallback={<>...</>}> <CarouselOverview /> </Suspense>
-            <Suspense fallback={<>...</>}> <AskQuestion /> </Suspense>
-            <Suspense fallback={<>...</>}> <Confirmation /> </Suspense>
-            <Suspense fallback={<>...</>}> <Share /> </Suspense>
-            <Suspense fallback={<>...</>}> <Footer /> </Suspense>
+            <Suspense fallback={<></>}> <HideBody /> </Suspense>
+            <Suspense fallback={<></>}> <QuikViewProduct /> </Suspense>
+            <Suspense fallback={<></>}> <SideCart /> </Suspense>
+            <Suspense fallback={<></>}> <SideFilter /> </Suspense>
+            <Suspense fallback={<></>}> <SideBar /> </Suspense>
+            <Suspense fallback={<></>}> <SideAccount /> </Suspense>
+            <Suspense fallback={<></>}> <CarouselOverview /> </Suspense>
+            <Suspense fallback={<></>}> <AskQuestion /> </Suspense>
+            <Suspense fallback={<></>}> <Confirmation /> </Suspense>
+            <Suspense fallback={<></>}> <Share /> </Suspense>
+            <Suspense fallback={<></>}> <Footer /> </Suspense>
           </CartProvider>
         </AlertProvider>
       </BrowserRouter>
