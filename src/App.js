@@ -43,9 +43,9 @@ const options = {
 const App = () => {
   return (
     <>
-      <BrowserRouter>
-        {/* <AlertProvider template={AlertTemplate} {...options}> */}
-          <CartProvider>
+      <AlertProvider template={AlertTemplate} {...options}>
+        <CartProvider>
+          <BrowserRouter>
             <Navbar />
             <ScrollTop />
               <Routes>
@@ -75,9 +75,9 @@ const App = () => {
             <Confirmation />
             <Share />
             <Footer />
-          </CartProvider>
-        {/* </AlertProvider> */}
-      </BrowserRouter>
+          </BrowserRouter>
+        </CartProvider>
+      </AlertProvider>
     </>
   )
 }
