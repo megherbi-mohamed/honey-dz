@@ -81,6 +81,9 @@ circle{
   .slide{
     height: 240px;
   }
+  .slide img {
+    height: 240px;
+  }
   .container-dots {
     left: 50%;
     transform: translateX(-50%);

@@ -83,7 +83,7 @@ export default function Slider(props) {
                 {images.map(function(image,i){
                     return (
                         <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                            <img src={image.url} alt={image.url}/>
+                            <img className='' src={image.url} alt={image.url}/>
                         </div>
                     )
                 })}
