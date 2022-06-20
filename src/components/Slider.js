@@ -1,17 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import ProgressiveImage from "react-progressive-graceful-image";
+import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
 import './Slider.css'
 
 export default function Slider() {
 
+    // let images = [
+    //     {srcDesktop: '/images/slide_1_desktop.webp',srcMobile:'/images/slide_1_mobile.webp',placeholder:'/images/slide_1_progressive.webp'},
+    //     {srcDesktop: '/images/slide_2_desktop.webp',srcMobile:'/images/slide_2_mobile.webp',placeholder:'/images/slide_2_progressive.webp'},
+    //     {srcDesktop: '/images/slide_3_desktop.webp',srcMobile:'/images/slide_3_mobile.webp',placeholder:'/images/slide_3_progressive.webp'},
+    // ]
+
     let images = [
-        {srcDesktop: '/images/slide_1_desktop.webp',srcMobile:'/images/slide_1_mobile.webp',placeholder:'/images/slide_1_progressive.webp'},
-        {srcDesktop: '/images/slide_2_desktop.webp',srcMobile:'/images/slide_2_mobile.webp',placeholder:'/images/slide_2_progressive.webp'},
-        {srcDesktop: '/images/slide_3_desktop.webp',srcMobile:'/images/slide_3_mobile.webp',placeholder:'/images/slide_3_progressive.webp'},
+        {src: 'Slide_3_desktop_JZlNcONlS.webp'},
+        {src: 'Slide_2_desktop_D4Dh5a16L.webp'},
+        {src: 'Slide_1_desktop_2DvWlpyih.webp'},
     ]
 
-    const width = window.innerWidth;
+    // const width = window.innerWidth;
 
     const [slideIndex, setSlideIndex] = useState(1)
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
@@ -83,6 +89,8 @@ export default function Slider() {
         // setInterval(nextSlide, intervalTime);
         // var sildeInterval = setInterval(nextSlide, intervalTime);
     // }, [slideIndex])
+
+    const urlEndpoint = 'https://ik.imagekit.io/vsmksnvdh/';
     
     
     return (
@@ -90,30 +98,30 @@ export default function Slider() {
             <>
                 {images.map(function(image,i){
                     return (
-                        <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                            {width < breakpoint ?
-                                <ProgressiveImage src={image.srcMobile} placeholder={image.placeholder} >
-                                    {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
-                                </ProgressiveImage>
-                                :
-                                <ProgressiveImage src={image.srcDesktop} placeholder={image.placeholder} >
-                                    {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
-                                </ProgressiveImage>
-                            }
-                        </div>
+                        <IKContext urlEndpoint={urlEndpoint}>
+                            <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
+                                <IKImage
+                                    path={image.src}
+                                    transformation={[{ quality: 10 }]}
+                                    lqip={{ active:true }}
+                                    loading="lazy"
+                                    width="auto"
+                                    quality="auto"
+                                />
+                            </div>
+                        </IKContext>
                     )
                 })}
-
                 <div className="container-dots">
                     {images.map(function(image,i){
                         // let button = 'button'+i
                         return (
-                        <div key={i} className="svg-wrapper" onClick={() => moveDot(i + 1)}>
-                            <svg height="40" width="40" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="20" cy="20" r="10" className={slideIndex === i + 1 ? "shape shape-active" : "shape"} height="10" width="10"></circle>
-                            </svg>
-                            <div className="circle"></div>
-                        </div>  
+                            <div key={i} className="svg-wrapper" onClick={() => moveDot(i + 1)}>
+                                <svg height="40" width="40" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="20" cy="20" r="10" className={slideIndex === i + 1 ? "shape shape-active" : "shape"} height="10" width="10"></circle>
+                                </svg>
+                                <div className="circle"></div>
+                            </div>  
                         )
                     })}
                 </div>
