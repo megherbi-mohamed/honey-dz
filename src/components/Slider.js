@@ -89,7 +89,7 @@ export default function Slider() {
                     return (
                         <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
                             {/* <img className='' src={image.url} alt={image.url}/> */}
-                            <ProgressiveImage src={image.src} placeholder={image.placeholder} delay={2000} >
+                            <ProgressiveImage src={image.src} placeholder={image.placeholder} >
                                 {(src,loading) => <img className={`${loading ? " loading" : " loaded"}`} src={src} alt="background_honey" />}
                             </ProgressiveImage>
                         </div>
