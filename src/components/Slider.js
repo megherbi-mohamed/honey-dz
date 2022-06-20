@@ -1,10 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
+import ProgressiveImage from "react-progressive-graceful-image";
 import './Slider.css'
 
-export default function Slider(props) {
+export default function Slider() {
 
-    let images = props.images;
+    let images = [
+        {src: '/images/slide_1.webp',placeholder:'/images/slide_1_m.webp'},
+        {src: '/images/slide_2.webp',placeholder:'/images/slide_2_m.webp'},
+        {src: '/images/slide_3.webp',placeholder:'/images/slide_3_m.webp'},
+    ]
 
     const [slideIndex, setSlideIndex] = useState(1)
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
@@ -83,7 +88,10 @@ export default function Slider(props) {
                 {images.map(function(image,i){
                     return (
                         <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                            <img className='' src={image.url} alt={image.url}/>
+                            {/* <img className='' src={image.url} alt={image.url}/> */}
+                            <ProgressiveImage src={image.src} placeholder={image.placeholder}>
+                                {(src) => <img src={src} alt="background_honey" />}
+                            </ProgressiveImage>
                         </div>
                     )
                 })}
