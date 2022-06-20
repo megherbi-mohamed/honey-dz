@@ -26,18 +26,20 @@ const Products = (props) => {
 
     return (
         <>
-            <div className={`${props.style} md:w-full border-box pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px] text-center relative`} onMouseEnter={() => {setopcaity({side:'lg:opacity-0',front:'lg:!opacity-100'});settransform({translateX:'lg:!translate-x-[0]',translateY:'lg:!translate-y-[0]'})}} onMouseLeave={() => {setopcaity({side:'',front:''});settransform({translateX:'',translateY:''})}}>
-                <div className="w-full h-full relative overflow-hidden">
-                    <Link className="relative flex items-center" to={`/products/${props.id}`}>
-                        <img src={'/images/'+props.side} alt="" className={`min-w-full transition-opacity duration-1000 ease-in-out ${opcaity.side}`}/>
-                        <img src={'/images/'+props.front} alt="" className={`-translate-x-[100%] min-w-full opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/>
-                    </Link>
-                </div>
+            <div className={`${props.style.style} border-box pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px] text-center relative`} onMouseEnter={() => {setopcaity({side:'lg:opacity-0',front:'lg:!opacity-100'});settransform({translateX:'lg:!translate-x-[0]',translateY:'lg:!translate-y-[0]'})}} onMouseLeave={() => {setopcaity({side:'',front:''});settransform({translateX:'',translateY:''})}}>
+                <Link to={`/products/${props.id}`}>
+                    <div className="w-[298px] relative overflow-hidden flex items-center mx-auto">
+                        
+                            <img src={'/images/'+props.side} alt="" className={`w-full transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
+                            <img src={'/images/'+props.front} alt="" className={`w-full -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/>
+                        
+                    </div>
+                </Link>
                 <Link className='relative after:content-[""] after:w-[50px] after:h-[100%] after:border-b-[2px] after:border-b-black after:absolute after:top-0 after:translate-x-[-50%]' to={`/products/${props.nom.replace(/\s/g, '-')}`}>
-                    <p className="py-[10px] capitalize mt-[10px] text-black text-[0.9rem] tracking-[2px] leading-[1.3rem] hover:text-[#bd8c27]">{props.nom}</p>
+                    <p className="w-[298px] py-[10px] capitalize mt-[10px] mx-auto text-black text-[0.9rem] tracking-[2px] leading-[1.3rem] hover:text-[#bd8c27]">{props.nom}</p>
                 </Link>
                 <p className="text-black py-[10px] text-[#bd8c27]">£{props.price}</p>
-                <div className="w-full h-0 lg:h-[100px] xl:h-[60px] grid grid-cols-1 xl:grid-cols-2 gap-[10px] py-[10px] items-start overflow-hidden">
+                <div className="w-[298px] mx-auto h-0 lg:h-[100px] xl:h-[60px] grid grid-cols-1 xl:grid-cols-2 gap-[10px] py-[10px] items-start text-center overflow-hidden">
                     <button className={`justify-self-center w-[calc(100%-40px)] translate-y-[-50px] transition duration-500 ease-in-out ${transform.translateY} py-[6px] text-[0.85rem] border-[2px_0_2px_0] border-[#bd8c27] bg-white relative z-10 after:content-[''] after:z-[-1] after:absolute after:top-[50%] after:translate-y-[-50%] after:left-[-12px] after:bg-white after:rotate-45 after:w-[25px] after:h-[25px] after:border-[0_0_2px_2px] after:border-[#bd8c27] befor:content-[''] before:z-[-1] before:absolute before:top-[50%] before:translate-y-[-50%] before:right-[-12px] before:bg-white before:rotate-45 before:w-[25px] before:h-[25px] before:border-[2px_2px_0_0] before:border-[#bd8c27]`} onClick={()=>display()}>QUICK SHOP</button>
                     <button className={`hidden md:block justify-self-center w-[calc(100%-40px)] translate-y-[-100px] xl:translate-y-[-50px] transition duration-500 ease-in-out ${transform.translateY} py-[8px] text-[0.85rem] bg-[#bd8c27] text-white relative z-10 after:content-[''] after:z-[-1] after:absolute after:top-[50%] after:translate-y-[-50%] after:left-[-12px] after:bg-[#bd8c27] after:rotate-45 after:w-[25px] after:h-[25px] after:border-[0_0_2px_2px] after:border-[#bd8c27] befor:content-[''] before:z-[-1] before:absolute before:top-[50%] before:translate-y-[-50%] before:right-[-12px] before:bg-[#bd8c27] before:rotate-45 before:w-[25px] before:h-[25px] before:border-[2px_2px_0_0] before:border-[#bd8c27]`}  onClick={()=>addProduct(data)}>ADD TO CART</button>
                 </div>
