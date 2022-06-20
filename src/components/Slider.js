@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
-import { IKImage, IKContext, IKUpload } from 'imagekitio-react';
+import { IKImage, IKContext } from 'imagekitio-react';
 import './Slider.css'
 
 export default function Slider() {
@@ -102,11 +102,10 @@ export default function Slider() {
                             <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
                                 <IKImage
                                     path={image.src}
-                                    transformation={[{ quality: 10 }]}
-                                    lqip={{ active:true }}
+                                    // transformation={[{ quality: 10, blur: 10 }]}
+                                    lqip={{ active: true, quality: 10, blur: 10 }}
                                     loading="lazy"
                                     width="auto"
-                                    quality="auto"
                                 />
                             </div>
                         </IKContext>
