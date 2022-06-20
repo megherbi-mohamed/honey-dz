@@ -18,8 +18,6 @@ const Home = () => {
 
     // let initProducts = [{},{},{},{},{},{},{},{},{}];
 
-    const {products} = useSelector((state) => state.products);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,6 +25,8 @@ const Home = () => {
             dispatch(getAllProducts());
         // }
     },[])
+
+    const {products} = useSelector((state) => state.products);
     
     // if (products.length === 0) {
     //     return (
