@@ -30,8 +30,8 @@ const Products = (props) => {
                 <Link to={`/products/${props.id}`}>
                     <div className="w-[298px] relative overflow-hidden flex items-center mx-auto">
                         
-                            <img src={'/images/'+props.side} alt="" className={`w-full transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
-                            <img src={'/images/'+props.front} alt="" className={`w-full -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/>
+                            <img src={'/images/'+props.side} alt="" className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
+                            <img src={'/images/'+props.front} alt="" className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/>
                         
                     </div>
                 </Link>
