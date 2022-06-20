@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useCart } from 'react-use-cart'
+import { IKImage } from 'imagekitio-react';
 
 const Products = (props) => {
 
@@ -23,16 +24,27 @@ const Products = (props) => {
         addItem(product,1)
         dispatch({ type: 'display', payload: {cart:'!translate-x-[0]',hideBody:'!block'}})
     } 
-
     return (
         <>
             <div className={`${props.style.style} border-box pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px] text-center relative`} onMouseEnter={() => {setopcaity({side:'lg:opacity-0',front:'lg:!opacity-100'});settransform({translateX:'lg:!translate-x-[0]',translateY:'lg:!translate-y-[0]'})}} onMouseLeave={() => {setopcaity({side:'',front:''});settransform({translateX:'',translateY:''})}}>
                 <Link to={`/products/${props.id}`}>
                     <div className="w-[298px] relative overflow-hidden flex items-center mx-auto">
-                        
-                            <img src={'/images/'+props.side} alt="" className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
-                            <img src={'/images/'+props.front} alt="" className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/>
-                        
+                            <IKImage
+                                path={props.side}
+                                lqip={{ active: true, quality: 10, blur: 10 }}
+                                loading="lazy"
+                                width="auto"
+                                className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}
+                            />
+                            <IKImage
+                                path={props.side}
+                                lqip={{ active: true, quality: 10, blur: 10 }}
+                                loading="lazy"
+                                width="auto"
+                                className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}
+                            />
+                            {/* <img src={'/images/'+props.side} alt="" className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
+                            <img src={'/images/'+props.front} alt="" className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/> */}
                     </div>
                 </Link>
                 <Link className='relative after:content-[""] after:w-[50px] after:h-[100%] after:border-b-[2px] after:border-b-black after:absolute after:top-0 after:translate-x-[-50%]' to={`/products/${props.nom.replace(/\s/g, '-')}`}>
