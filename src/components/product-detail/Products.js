@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from 'react'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCart } from 'react-use-cart'
 import { Link } from 'react-router-dom'
@@ -18,12 +18,11 @@ const Products = () => {
 
     const { product } = useSelector((state) => state.products);
     const dispatch = useDispatch();
-    const location = useLocation();
     
     useEffect(() => {
         dispatch(getProduct(id));
-        setScroll(location,id);
-    },[location])
+        setScroll();
+    },[])
 
     const displayAskQuestion = () => {
         dispatch({ type: 'display', payload: {askQuestion:'!block',hideBody:'!block'}})

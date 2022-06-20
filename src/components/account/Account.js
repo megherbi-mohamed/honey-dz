@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,6 @@ const Account = () => {
     // const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const user = JSON.parse(localStorage.getItem('profile'));
 
-    const location = useLocation();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -32,7 +31,7 @@ const Account = () => {
         // setUser(null);
     };
 
-    useEffect(async () => {
+    useEffect(() => {
         const token = user?.token;
         if (token) {
             const decodedToken = decode(token);
@@ -44,11 +43,11 @@ const Account = () => {
         if (!user) {
             navigate('/account/signin')
         }
-        if (addresses.length == 0) {
+        if (addresses.length === 0) {
             dispatch(getUserAddresses());
         }
         dispatch(getUserCommandes());
-    }, [location]);
+    }, []);
 
     // if (!user) {
     //     return <div></div>

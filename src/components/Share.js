@@ -7,7 +7,6 @@ import { faFacebookF, faPinterestP, faTwitter } from '@fortawesome/free-brands-s
 const AskQuestion = () => {
 
     const display = useSelector((state) => state.display);
-    const data = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const hide = () => {
         dispatch({ type: 'display', payload: {share:'',hideBody:''}})

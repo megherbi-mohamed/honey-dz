@@ -9,12 +9,9 @@ const Cart = () => {
     const { 
         isEmpty, 
         items, 
-        totalItems, 
-        totalUniqueItems, 
         cartTotal, 
         updateItemQuantity, 
-        removeItem,
-        emptyCart 
+        removeItem
     } = useCart()
 
     let initDisplay = {note:'',shipping:'',background:'',opacity:''}

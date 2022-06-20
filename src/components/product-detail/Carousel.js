@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faArrowRight, faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 import { productSlider } from './Functions'
 

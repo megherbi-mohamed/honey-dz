@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,7 +15,6 @@ const Signin = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const initialState = { email: '', password: ''}
     const [form, setForm] = useState(initialState)
@@ -33,7 +32,7 @@ const Signin = () => {
         if (user) {
             navigate('/account')
         }
-    }, [location])
+    }, [])
     
     
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });

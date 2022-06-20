@@ -6,7 +6,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 const AskQuestion = () => {
 
     const display = useSelector((state) => state.display);
-    const data = useSelector((state) => state.data);
     const dispatch = useDispatch();
     const hide = () => {
         dispatch({ type: 'display', payload: {askQuestion:'',hideBody:''}})

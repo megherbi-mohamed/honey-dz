@@ -10,30 +10,30 @@ export default function Slider(props) {
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
     const [dropDown, setdropDown] = useState(intiDropDown)
 
-    var intervalTime = 4000;
+    // var intervalTime = 4000;
     
-    const nextSlide = () => {
-        if(slideIndex !== 5){
-            if (slideIndex === 1) {
-                setdropDown({button1:'!visible md:!translate-y-[0] !opacity-100'})
-            }
-            else if (slideIndex === 2) {
-                setdropDown({button2:'!visible md:!translate-y-[0] !opacity-100'})
-            }
-            else if (slideIndex === 3) {
-                setdropDown({button3:'!visible md:!translate-y-[0] !opacity-100'})
-            }
-            else if (slideIndex === 4) {
-                setdropDown({button4:'!visible md:!translate-y-[0] !opacity-100'})
-            }
-        } 
-        else if (slideIndex === 5){
-            setSlideIndex(5)
-            setdropDown({button5:'!visible md:!translate-y-[0] !opacity-100'})
-            setSlideIndex(1)
+    // const nextSlide = () => {
+    //     if(slideIndex !== 5){
+    //         if (slideIndex === 1) {
+    //             setdropDown({button1:'!visible md:!translate-y-[0] !opacity-100'})
+    //         }
+    //         else if (slideIndex === 2) {
+    //             setdropDown({button2:'!visible md:!translate-y-[0] !opacity-100'})
+    //         }
+    //         else if (slideIndex === 3) {
+    //             setdropDown({button3:'!visible md:!translate-y-[0] !opacity-100'})
+    //         }
+    //         else if (slideIndex === 4) {
+    //             setdropDown({button4:'!visible md:!translate-y-[0] !opacity-100'})
+    //         }
+    //     } 
+    //     else if (slideIndex === 5){
+    //         setSlideIndex(5)
+    //         setdropDown({button5:'!visible md:!translate-y-[0] !opacity-100'})
+    //         setSlideIndex(1)
             
-        }
-    }
+    //     }
+    // }
 
     // const prevSlide = () => {
     //     if(slideIndex !== 1){
@@ -69,12 +69,12 @@ export default function Slider(props) {
         }
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         // console.log(slideIndex);
         // clearInterval(sildeInterval)
         // setInterval(nextSlide, intervalTime);
         // var sildeInterval = setInterval(nextSlide, intervalTime);
-    }, [slideIndex])
+    // }, [slideIndex])
     
     
     return (
@@ -83,14 +83,14 @@ export default function Slider(props) {
                 {images.map(function(image,i){
                     return (
                         <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                            <img src={image.url} />
+                            <img src={image.url} alt={image.url}/>
                         </div>
                     )
                 })}
 
                 <div className="container-dots">
                     {images.map(function(image,i){
-                        let button = 'button'+i
+                        // let button = 'button'+i
                         return (
                         <div key={i} className="svg-wrapper" onClick={() => moveDot(i + 1)}>
                             <svg height="40" width="40" xmlns="http://www.w3.org/2000/svg">

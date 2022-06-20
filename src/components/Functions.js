@@ -1,4 +1,4 @@
-export const setScroll = (location,id) => {
+export const setScroll = () => {
     window.addEventListener("scroll", () => {
         // if (location.pathname === '/products/'+id) {
             if (window.innerWidth < 768) {

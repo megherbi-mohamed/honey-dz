@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert'
 
@@ -21,7 +21,6 @@ const AddressForm = () => {
     const {countries,states} = useSelector((state) => state.countryState);
     const {message, loading} = useSelector((state) => state.message);
     const dispatch = useDispatch();
-    const location = useLocation();
     const alert = useAlert();
 
     const [stateArray, setstateArray] = useState([]);
@@ -30,7 +29,7 @@ const AddressForm = () => {
     useEffect(() => {
         dispatch(getUserAddress(id));
         dispatch(getAllCountries());
-    }, [location])
+    }, [])
     
     useEffect(() => {
         setForm({ ...form, 
@@ -62,11 +61,11 @@ const AddressForm = () => {
             }
             dispatch(getStates(address.country));
         }
-    }, [countries,address])
+    }, [countries,address,dispatch])
 
     useEffect(() => {
         dispatch(getStates(form.country));
-    }, [form.country])
+    }, [form.country,dispatch])
     
     useEffect(() => {
         if (states.length > 0) {
@@ -83,7 +82,7 @@ const AddressForm = () => {
 
     const handleCheckedChange = () => {
         var checkBox = document.getElementById("asdefault");
-        if (checkBox.checked == true) {
+        if (checkBox.checked === true) {
             setForm({...form, asdefault:true})
         }
         else{

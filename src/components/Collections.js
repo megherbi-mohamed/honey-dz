@@ -16,7 +16,7 @@ const Collections = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCategoryProducts(id));
-    },[id])
+    },[])
 
     const display = () => {
         dispatch({ type: 'display', payload: {sideFilter:'!translate-x-[0]',hideBody:'!block'}})
@@ -35,7 +35,7 @@ const Collections = () => {
                 <div className="w-full border-box mx-auto mb-[0] md:my-[24px] lg:mt-[20px] lg:px-0 lg:px-0 grid gap-[20px] lg:gap-[24px] grid-cols-2 md:grid-cols-4 items-start">
                     {!products.length ?  <p className=''>Loading Collections</p> : (
                             products.map(product => (
-                                <Product style={'w-full'} front={product.front} side={product.side} color={product.color} nom={product.nom} prix={product.prix} />
+                                <Product style={{style:'w-full'}} front={product.front} side={product.side} color={product.color} nom={product.nom} prix={product.prix} />
                             ))
                         )
                     }

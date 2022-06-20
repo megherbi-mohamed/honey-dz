@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,10 +22,8 @@ const OnlineCommande = () => {
     const {loading,message} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation();
     const alert = useAlert();
 
-    const user = JSON.parse(localStorage.getItem('profile'));
     const [stateArray, setstateArray] = useState([]);
     const [form, setForm] = useState([])
 
@@ -40,7 +38,7 @@ const OnlineCommande = () => {
         if (id) {
             dispatch(getProduct(id));
         }
-    }, [location])
+    }, [])
 
     useEffect(() => {
         if (addresses.length > 0) {
@@ -89,7 +87,7 @@ const OnlineCommande = () => {
         }
     }
     
-    useEffect(async () => {
+    useEffect(() => {
         if (countries.length > 0) {
             if (countries.length > 0) {
                 if (addresses[0].country) {
@@ -101,7 +99,7 @@ const OnlineCommande = () => {
                 dispatch(getStates(addresses[0].country));
             }
         }
-    }, [countries,addresses])
+    }, [countries,addresses,dispatch])
 
     useEffect(() => {
         if (states.length > 0) {
@@ -139,7 +137,7 @@ const OnlineCommande = () => {
 
     useEffect(() => {
         dispatch(getStates(form.country));
-    }, [form.country])
+    }, [form.country,dispatch])
 
     let formData = {commande:form, produits: id ? setitems(product,true) : setitems(items,false), facture: id ? setFacture(product,true) : setFacture(items,false)}
     
@@ -291,7 +289,7 @@ const OnlineCommande = () => {
                                 <select onChange={handleAddressChange} className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
                                     {addresses ?
                                         addresses.map((address,index) => (
-                                            <option key={index} id={address._id} value={index}>{address.country+' '+'('+address.firstname+' '+address.lastname+')'}</option>
+                                            <option key={index} id={address._id} value={index}>{`${address.country} (${address.firstname} ${address.lastname})`}</option>
                                         )) : null
                                     }
                                     <option value="new">Use a new address</option>

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCart } from 'react-use-cart'
 import { useAlert } from 'react-alert'
 
-import * as actionType from '../constants/actionTypes';
 import { insertOfflineCartCommande, insertOfflineProductCommande } from '../actions/commande';
 import { getAllCountries, getStates } from '../actions/countryState';
 import { getProduct } from '../actions/products';
@@ -25,11 +24,6 @@ const Commande = () => {
 
     const [stateArray, setstateArray] = useState([]);
     const [form, setForm] = useState([])
-
-    const logout = () => {
-        dispatch({ type: actionType.LOGOUT });
-        navigate('/account');
-    };
 
     useEffect(() => {
         dispatch(getAllCountries());

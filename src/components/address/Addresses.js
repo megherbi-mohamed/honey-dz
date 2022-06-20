@@ -1,5 +1,5 @@
-import React, {useEffect,useState} from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import React, {useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { useSelector,useDispatch } from 'react-redux';
@@ -13,14 +13,13 @@ const Addresses= () => {
 
     const {addresses} = useSelector((state) => state.addresses);
     
-    const location  = useLocation()
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (addresses.length === 0) {
            dispatch(getUserAddresses());
         }
-    }, [location])
+    }, [])
 
     // if (addresses.length === 0) {
     //     return (

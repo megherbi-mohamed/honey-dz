@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert'
 
@@ -18,7 +18,6 @@ const NewAddress = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate();
-    const location = useLocation();
 
     const [stateArray, setstateArray] = useState([]);
     const [form, setForm] = useState([]);
@@ -36,7 +35,7 @@ const NewAddress = () => {
             phone: ''
         });
         dispatch(getAllCountries());
-    }, [location])
+    }, [])
 
     useEffect(() => {
         if (message !== '') {
@@ -77,7 +76,7 @@ const NewAddress = () => {
 
     const handleCheckedChange = () => {
         var checkBox = document.getElementById("asdefault");
-        if (checkBox.checked == true) {
+        if (checkBox.checked === true) {
             setForm({...form, asdefault:true})
         }
         else{
