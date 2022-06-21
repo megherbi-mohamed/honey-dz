@@ -39,6 +39,7 @@ const OnlineCommande = () => {
         if (id) {
             dispatch(getProduct(id));
         }
+        console.log('dispatch');
     }, [])
 
     useEffect(() => {
@@ -54,6 +55,7 @@ const OnlineCommande = () => {
                 zipcode: addresses[0].zipcode,
                 phone: addresses[0].phone
             });
+            console.log(addresses[0]._id);
             document.getElementById(addresses[0]._id).selected = 'selected'
         }
     }, [addresses])
