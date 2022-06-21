@@ -21,7 +21,6 @@ const Cart = lazy(()=> import('./components/Cart'));
 const Footer = lazy(()=> import('./components/footer/Footer'));
 
 const ScrollTop = lazy(()=> import('./components/ScrollTop'));
-const SetScroll = lazy(()=> import('./components/SetScroll'));
 const HideBody = lazy(()=> import('./components/HideBody'));
 const QuikViewProduct = lazy(()=> import('./components/Product-quickview/QuickView'));
 const SideCart = lazy(()=> import('./components/SideCart'));
@@ -50,7 +49,6 @@ const App = () => {
           <CartProvider>
             <Suspense fallback={<></>}> <Navbar /> </Suspense>
             <Suspense fallback={<></>}> <ScrollTop /> </Suspense>
-            {/* <Suspense fallback={<></>}> <SetScroll /> </Suspense> */}
             <Routes>
 
               <Route exact path="/" element={ <Suspense fallback={<></>}><Home /></Suspense> } />
