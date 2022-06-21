@@ -5,8 +5,6 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { IKContext } from 'imagekitio-react';
 
-import OnlineCommande from "./components/OnlineCommande";
-
 const Navbar = lazy(()=> import('./components/navbar/Navbar'));
 const Home = lazy(()=> import('./components/Home'));
 const About = lazy(()=> import('./components/About'));
@@ -19,7 +17,7 @@ const AddressForm = lazy(()=> import('./components/address/AddressForm'));
 const Products = lazy(()=> import('./components/product-detail/Products'));
 const Collections = lazy(()=> import('./components/Collections'));
 const TermsConditions = lazy(()=> import('./components/TermsConditions'));
-// const OnlineCommande = lazy(()=> import('./components/OnlineCommande'));
+const OnlineCommande = lazy(()=> import('./components/OnlineCommande'));
 const OfflineCommande = lazy(()=> import('./components/OfflineCommande'));
 const Cart = lazy(()=> import('./components/Cart'));
 const Footer = lazy(()=> import('./components/footer/Footer'));
@@ -53,41 +51,39 @@ const App = () => {
         <IKContext urlEndpoint={urlEndpoint}>
           <AlertProvider template={AlertTemplate} {...options}>
             <CartProvider>
-              <Suspense fallback={<></>}> <Navbar /> </Suspense>
-              <Suspense fallback={<></>}> <ScrollTop /> </Suspense>
-              <Routes>
-
-                <Route exact path="/" element={ <Suspense fallback={<></>}><Home /></Suspense> } />
-                <Route exact path="/about" element={ <Suspense fallback={<></>}><About /></Suspense> } />
-                <Route exact path="/account" element={ <Suspense fallback={<></>}><Account /></Suspense> } />
-                <Route exact path="account/signin" element={ <Suspense fallback={<></>}><Signin /></Suspense> } />
-                <Route exact path="/account/register" element={ <Suspense fallback={<></>}><Register /></Suspense> } />
-                <Route exact path="/account/addresses" element={ <Suspense fallback={<></>}><Addresses /></Suspense> } />
-                <Route exact path="/account/addresses/add" element={ <Suspense fallback={<></>}><NewAddress /></Suspense> } />
-                <Route exact path="/account/addresses/update/:id" element={ <Suspense fallback={<></>}><AddressForm /></Suspense> } />
-                <Route exact path="/products/:id" element={ <Suspense fallback={<></>}><Products /></Suspense> } />
-                <Route exact path="/collections/:id" element={ <Suspense fallback={<></>}><Collections /></Suspense> } />
-                <Route exact path="/cart" element={ <Suspense fallback={<></>}><Cart /></Suspense> } />
-                <Route exact path="/terms-conditions" element={ <Suspense fallback={<></>}><TermsConditions /></Suspense> } />
-                <Route exact path="/commande/offline" element={ <Suspense fallback={<>waitinggggg</>}><OfflineCommande /></Suspense> } />
-                <Route exact path="/commande/offline/:id/:quantity" element={ <Suspense fallback={<>waitinggggg</>}><OfflineCommande /></Suspense> } />
-                {/* <Route exact path="/commande/online" element={ <Suspense fallback={<>waitinggggg</>}><OnlineCommande /></Suspense> } />
-                <Route exact path="/commande/online/:id/:quantity" element={ <Suspense fallback={<>waitinggggg</>}><OnlineCommande /></Suspense> } /> */}
-                <Route exact path="/commande/online" element={ <OnlineCommande />} />
-                <Route exact path="/commande/online/:id/:quantity" element={ <OnlineCommande />} />
-              
-              </Routes>
-              <Suspense fallback={<></>}> <HideBody /> </Suspense>
-              <Suspense fallback={<></>}> <QuikViewProduct /> </Suspense>
-              <Suspense fallback={<></>}> <SideCart /> </Suspense>
-              <Suspense fallback={<></>}> <SideFilter /> </Suspense>
-              <Suspense fallback={<></>}> <SideBar /> </Suspense>
-              <Suspense fallback={<></>}> <SideAccount /> </Suspense>
-              <Suspense fallback={<></>}> <CarouselOverview /> </Suspense>
-              <Suspense fallback={<></>}> <AskQuestion /> </Suspense>
-              <Suspense fallback={<></>}> <Confirmation /> </Suspense>
-              <Suspense fallback={<></>}> <Share /> </Suspense>
-              <Suspense fallback={<></>}> <Footer /> </Suspense>
+            <Suspense fallback={<></>}>
+              <Navbar /> 
+              <ScrollTop /> 
+                <Routes>
+                  <Route exact path="/" element={ <Home /> } />
+                  <Route exact path="/about" element={<About />} />
+                  <Route exact path="/account" element={<Account />} />
+                  <Route exact path="account/signin" element={<Signin />} />
+                  <Route exact path="/account/register" element={<Register /> } />
+                  <Route exact path="/account/addresses" element={<Addresses /> } />
+                  <Route exact path="/account/addresses/add" element={<NewAddress /> } />
+                  <Route exact path="/account/addresses/update/:id" element={<AddressForm /> } />
+                  <Route exact path="/products/:id" element={<Products />} />
+                  <Route exact path="/collections/:id" element={<Collections />} />
+                  <Route exact path="/cart" element={<Cart />} />
+                  <Route exact path="/terms-conditions" element={<TermsConditions />} />
+                  <Route exact path="/commande/offline" element={<OfflineCommande />} />
+                  <Route exact path="/commande/offline/:id/:quantity" element={<OfflineCommande /> } />
+                  <Route exact path="/commande/online" element={<OnlineCommande />} />
+                  <Route exact path="/commande/online/:id/:quantity" element={<OnlineCommande />} />
+                </Routes>
+                <HideBody /> 
+                <QuikViewProduct /> 
+                <SideCart /> 
+                <SideFilter /> 
+                <SideBar /> 
+                <SideAccount /> 
+                <CarouselOverview /> 
+                <AskQuestion /> 
+                <Confirmation /> 
+                <Share /> 
+                <Footer /> 
+              </Suspense>
             </CartProvider>
           </AlertProvider>
         </IKContext>

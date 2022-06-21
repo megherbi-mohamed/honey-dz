@@ -21,86 +21,86 @@ const Addresses= () => {
         }
     }, [])
 
-    // if (addresses.length === 0) {
-    //     return (
-    //         <>
-    //             <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
-    //                 <div className='w-[200px] h-[30px] mx-auto rounded-[15px] bg-[#ecedee]'></div>
-    //                 <div className="flex items-center justify-center mt-[30px]">
-    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
-    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                 </div>
-    //             </div>
-    //             <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
-    //                 <div className="md:px-4 xl:px-16 w-1/6 sf-customer__nav hidden md:flex flex-col border-r border-color-border">
-    //                     <div className='mb-[10px] w-[120px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <div className='mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <div className='mb-[10px] w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                 </div>
-    //                 <div className="px-4 md:px-8 xl:px-16 2xl:px-24 w-full md:w-5/6">
-    //                     <div className='mb-[30px] w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <div className='mb-[40px] w-[180px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
-    //                     <div className='mb-[30px] w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <div className="mb-16">
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                         <div className="flex border-b border-color-border py-5">
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                             <div className='w-1/2'>
-    //                                 <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                     <div className='flex items-center mt-[30px]'>
-    //                         <div className='w-[90px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
-    //                         <div className='ml-[20px] w-[90px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </>
-    //     )
-    // } 
+    if (addresses.length === 0) {
+        return (
+            <>
+                <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
+                    <div className='w-[200px] h-[30px] mx-auto rounded-[15px] bg-[#ecedee]'></div>
+                    <div className="flex items-center justify-center mt-[30px]">
+                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                        <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
+                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                    </div>
+                </div>
+                <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
+                    <div className="md:px-4 xl:px-16 w-1/6 sf-customer__nav hidden md:flex flex-col border-r border-color-border">
+                        <div className='mb-[10px] w-[120px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                        <div className='mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                        <div className='mb-[10px] w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                    </div>
+                    <div className="px-4 md:px-8 xl:px-16 2xl:px-24 w-full md:w-5/6">
+                        <div className='mb-[30px] w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                        <div className='mb-[40px] w-[180px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
+                        <div className='mb-[30px] w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                        <div className="mb-16">
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex border-b border-color-border py-5">
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='w-1/2'>
+                                    <div className='mb-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex items-center mt-[30px]'>
+                            <div className='w-[90px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
+                            <div className='ml-[20px] w-[90px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    } 
 
     return (
         <>
