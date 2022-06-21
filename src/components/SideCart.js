@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { IKImage } from 'imagekitio-react';
 
 const SideCart = () => {
 
@@ -38,8 +39,8 @@ const SideCart = () => {
                     {isEmpty ? <span>Your cart is currently empty.</span> : (
                         items.map((item, index) => (
                             <div className="flex py-[12px]" key={index}>
-                                <Link onClick={()=>hide()} to={'/products/'+item.nom}>
-                                    <img src={'/images/'+item.side} className="min-w-[100px] max-w-[100px] border-[1px] border-[#dedede]" alt="" />
+                                <Link onClick={()=>hide()} to={'/products/'+item.id}>
+                                    <IKImage path={item.side} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="min-w-[100px] max-w-[100px] border-[1px] border-[#dedede]" />
                                 </Link>
                                 <div className="px-[15px] md:px-[20px]">
                                     <Link onClick={()=>hide()} to={'/products/'+item.nom} className="text-[14px] md:text-[16px]">{item.nom}</Link>

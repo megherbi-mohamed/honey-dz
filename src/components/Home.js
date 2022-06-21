@@ -1,6 +1,5 @@
 import React, {lazy,Suspense,useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { IKContext } from 'imagekitio-react';
 
 import { getAllProducts } from '../actions/products';
 
@@ -10,8 +9,6 @@ import Slider from './Slider'
 const Product = lazy(()=> import('./Product'));
 
 const Home = () => {
-
-    const urlEndpoint = 'https://ik.imagekit.io/vsmksnvdh/';
 
     let initProducts = [{},{},{},{},{},{},{},{},{}];
 
@@ -44,9 +41,7 @@ const Home = () => {
                     }> 
                     {products.length > 0 ?  
                         products.map((product,i) => (
-                            <IKContext urlEndpoint={urlEndpoint}>
-                                <Product style={{style:'px-[7.5px]'}} key={i} id={product._id} front={product.front} side={product.side} color={product.color} nom={product.nom} price={product.prix} />
-                            </IKContext>
+                            <Product style={{style:'px-[7.5px]'}} key={i} id={product._id} front={product.front} side={product.side} color={product.color} nom={product.nom} price={product.prix} />
                         )) : null
                     }
                 </Suspense>

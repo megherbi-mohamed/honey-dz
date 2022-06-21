@@ -82,23 +82,18 @@ export default function Slider() {
         // var sildeInterval = setInterval(nextSlide, intervalTime);
     // }, [slideIndex])
 
-    const urlEndpoint = 'https://ik.imagekit.io/vsmksnvdh/';
-    
     return (
         <div className="container-slider">
             <>
                 {images.map((image,i) => (
-                        <IKContext urlEndpoint={urlEndpoint}>
-                            <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                                <IKImage
-                                    path={image.src}
-                                    lqip={{ active: true, quality: 10, blur: 10 }}
-                                    loading="lazy"
-                                    width="auto"
-                                />
-                            </div>
-                        </IKContext>
-                        // <link rel="preload" as="image" href={urlEndpoint+image.src} imagesrcset={urlEndpoint+image.src} />
+                    <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
+                        <IKImage
+                            path={image.src}
+                            lqip={{ active: true, quality: 10, blur: 10 }}
+                            loading="lazy"
+                            width="auto"
+                        />
+                    </div>
                 ))}
                 <div className="container-dots">
                     {images.map(function(image,i){
