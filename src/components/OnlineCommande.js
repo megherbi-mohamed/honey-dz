@@ -55,7 +55,7 @@ const OnlineCommande = () => {
                 zipcode: addresses[0].zipcode,
                 phone: addresses[0].phone
             });
-            document.getElementById(addresses[0]._id).selected = 'selected'
+            // document.getElementById(addresses[0]._id).selected = 'selected'
         }
     }, [addresses])
 
@@ -93,10 +93,10 @@ const OnlineCommande = () => {
         if (countries.length > 0) {
             if (addresses.length > 0) {
                 if (addresses[0].country) {
-                    document.getElementById(addresses[0].country).selected = 'selected'
+                    // document.getElementById(addresses[0].country).selected = 'selected'
                 }
                 else{
-                    document.getElementById('DZ').selected = 'selected'
+                    // document.getElementById('DZ').selected = 'selected'
                 }
                 dispatch(getStates(addresses[0].country));
             }
@@ -182,13 +182,92 @@ const OnlineCommande = () => {
         navigate('/account')
     }
 
-    // if ((addresses.length === 0 || product.length === 0) && countries.length === 0) {
-    //     return (
-    //         <div className='fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#fff] z-50 overflow-y-auto'>
-    //             waitinng
-    //         </div>
-    //     )
-    // }
+    if (countries.length === 0) {
+        return (
+            <div className='fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#fff] z-50 overflow-y-auto'>
+                <div className='flex items-start flex flex-col md:flex-row'>
+                    <div className='w-[100vw] md:w-[50vw] md:ml-[10vw] md:p-[56px_66px_21px_5vw]'>
+                        <div className='w-[100px] h-[30px] rounded-[5px] bg-[#ecedee] m-[20px] md:m-0'></div>
+                        <div className='block md:hidden w-full bg-[#f9f9f9]'>
+                            <div className='flex items-center p-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                <div className='w-[200px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                            </div>
+                        </div>
+                        <div className='p-[20px] md:p-0 text-left'>
+                            <div className="flex items-center justify-start my-[20px]">
+                                <div className='w-[50px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                <FontAwesomeIcon icon={faAngleRight} className="text-[10px] text-[#ecedee] mx-[20px]" />
+                                <div className='w-[50px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                            </div>
+                            <div className='w-[100px] h-[20px] rounded-[10px] mb-[20px] bg-[#ecedee]'></div>
+                            <div className='flex items-center'>
+                                <div className='w-[50px] h-[50px] rounded-[8px] mb-[20px] bg-[#ecedee]'></div>
+                                <div className='ml-[10px] mb-[20px]'>
+                                    <div className='w-[150px] h-[15px] rounded-[7.5px] mb-[15px] bg-[#ecedee]'></div>
+                                    <div className='w-[100px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className='flex items-center my-[20px]'>
+                                <div className='w-[220px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                            </div>
+                            <div className='w-[200px] h-[20px] rounded-[10px] mb-[15px] bg-[#ecedee]'></div>
+                            <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px] mb-[15px]'></div>
+                            <div className='w-full grid grid-cols-2 gap-[15px] mb-[15px]'>
+                                <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px]'></div>
+                                <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px]'></div>
+                            </div>
+                            <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px] mb-[15px]'></div>
+                            <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px] mb-[15px]'></div>
+                            <div className='w-full grid grid-cols-3 gap-[15px] mb-[15px]'>
+                                <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px]'></div>
+                                <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px]'></div>
+                                <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px]'></div>
+                            </div>
+                            <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px] mb-[15px]'></div>
+                            <div className='w-full h-[47px] border-[2px] border-[#ecedee] rounded-[5px] mb-[15px]'></div>
+                            <div className='w-full md:w-[150px] h-[45px] bg-[#ecedee] rounded-[5px]'></div>
+                        </div>
+                    </div>
+                    <div className='hidden md:block w-[100vw] md:w-[40vw] bg-[#f9f9f9] min-h-[100vw] border-l-[1px] border-l-[#d3d3d3] justify-self-start'>
+                        <div className='w-full w-full md:w-[30vw] md:mr-[10vw] p-[20px] md:p-[67px_73px_21px_44px]'>
+                            <div className="flex py-[12px] w-full">
+                                <div className='min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#ecedee]'></div>
+                                <div className="pl-[20px] w-full flex items-center justify-between">
+                                    <div className='w-[100px] h-[20px] rounded-[10px] mb-[20px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex py-[12px] w-full">
+                                <div className='min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#ecedee]'></div>
+                                <div className="pl-[20px] w-full flex items-center justify-between">
+                                    <div className='w-[100px] h-[20px] rounded-[10px] mb-[20px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className="flex py-[12px] w-full">
+                                <div className='min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#ecedee]'></div>
+                                <div className="pl-[20px] w-full flex items-center justify-between">
+                                    <div className='w-[100px] h-[20px] rounded-[10px] mb-[20px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className='py-[20px] mt-[20px] border-t-[1px] border-b-[1px] border-[#d3d3d3]'>
+                                <div className='mb-[10px] flex items-center justify-between'>
+                                    <div className='w-[100px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                    <div className='w-[100px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                </div>
+                                <div className='flex items-center justify-between'>
+                                    <div className='w-[100px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                    <div className='w-[100px] h-[15px] rounded-[7.5px] bg-[#ecedee]'></div>
+                                </div>
+                            </div>
+                            <div className='mt-[20px] flex items-center justify-between'>
+                                <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                                <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className='fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#fff] z-50 overflow-y-auto'>
