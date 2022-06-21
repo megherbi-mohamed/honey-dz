@@ -39,7 +39,6 @@ const OnlineCommande = () => {
         if (id) {
             dispatch(getProduct(id));
         }
-        console.log('render online commande');
     }, [])
 
     useEffect(() => {
@@ -55,7 +54,7 @@ const OnlineCommande = () => {
                 zipcode: addresses[0].zipcode,
                 phone: addresses[0].phone
             });
-            // document.getElementById(addresses[0]._id).selected = 'selected'
+            document.getElementById(addresses[0]._id).selected = 'selected'
         }
     }, [addresses])
 
@@ -93,10 +92,10 @@ const OnlineCommande = () => {
         if (countries.length > 0) {
             if (addresses.length > 0) {
                 if (addresses[0].country) {
-                    // document.getElementById(addresses[0].country).selected = 'selected'
+                    document.getElementById(addresses[0].country).selected = 'selected'
                 }
                 else{
-                    // document.getElementById('DZ').selected = 'selected'
+                    document.getElementById('DZ').selected = 'selected'
                 }
                 dispatch(getStates(addresses[0].country));
             }
