@@ -1,14 +1,19 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState,useEffect,lazy,Suspense} from 'react'
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCart } from 'react-use-cart'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight, faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons'
-import Carousel from './Carousel';
 import { getProduct } from '../../actions/products';
+// import Carousel from './Carousel';
 
-import { setScroll } from '../Functions';
+const Carousel = lazy(()=> import('./Carousel'));
+
+// const {getProduct} = lazy(()=> import('../../actions/products'));
+
+
+
 
 const Products = () => {
 
@@ -76,46 +81,46 @@ const Products = () => {
     const width = window.innerWidth;
     const strockWidth = 768;
 
-    // if (product.length === 0) {
-    //     return (
-    //         <div className="w-full lg:max-w-[1200px] mx-auto my-[56px] md:my-[60px] ">
-    //             <div className="mt-[80px] px-[12px] py-[50px] hidden md:block">
-    //                 <div className="flex items-center">
-    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
-    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-    //                 </div>
-    //             </div>
-    //             <div className="grid grid-cols-1 md:grid-cols-2 px-[15px] md:px-[10px]">
-    //                 <div className="w-full px-[20px] md:px-[16px] grid grid-cols-1 md:grid-cols-[80px,calc(100%-100px)] grid-rows-[300px] md:grid-rows-[500px] gap-[20px] justify-center">
-    //                     <div className="hidden md:flex flex-col">
-    //                         <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
-    //                         <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
-    //                     </div>
-    //                     <div className="w-full h-full md:rounded-[10px] bg-[#ecedee]"></div>
-    //                     <div className="flex w-full justify-center md:hidden items-center">
-    //                         <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
-    //                         <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
-    //                     </div>
-    //                 </div>
-    //                 <div className='w-full md:px-4 mt-[20px] md:mt-0'>
-    //                     <div className='w-[300px] h-[30px] rounded-[15px] bg-[#ecedee] mb-[20px]'></div>
-    //                     <div className='w-[70px] h-[30px] rounded-[15px] bg-[#ecedee] mb-[40px]'></div>
-    //                     <div className='w-[70px] h-[20px] rounded-[10px] bg-[#ecedee] mb-[20px] hidden md:block'></div>
-    //                     <div className="flex items-center md:items-end flex-wrap md:flex-nowrap">
-    //                         <div className='flex flex-1 md:flex-none w-[120px] h-[46px] rounded-[10px] bg-[#ecedee]'></div>
-    //                         <div className='w-[120px] h-[46px] rounded-[10px] bg-[#ecedee] grow shrink ml-[10px]'></div>
-    //                     </div>
-    //                     <div className='w-full mt-[20px] h-[46px] rounded-[10px] bg-[#ecedee]'></div>
-    //                     <div className="flex items-center mt-[44px] pb-[16px] border-b border-b-[1px] border-[#e5e7eb]">
-    //                         <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
-    //                         <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee] ml-[20px]'></div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    if (product.length === 0) {
+        return (
+            <div className="w-full lg:max-w-[1200px] mx-auto my-[56px] md:my-[60px] ">
+                <div className="mt-[80px] px-[12px] py-[50px] hidden md:block">
+                    <div className="flex items-center">
+                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                        <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
+                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 px-[15px] md:px-[10px]">
+                    <div className="w-full px-[20px] md:px-[16px] grid grid-cols-1 md:grid-cols-[80px,calc(100%-100px)] grid-rows-[300px] md:grid-rows-[500px] gap-[20px] justify-center">
+                        <div className="hidden md:flex flex-col">
+                            <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
+                            <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
+                        </div>
+                        <div className="w-full h-full md:rounded-[10px] bg-[#ecedee]"></div>
+                        <div className="flex w-full justify-center md:hidden items-center">
+                            <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
+                            <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
+                        </div>
+                    </div>
+                    <div className='w-full md:px-4 mt-[20px] md:mt-0'>
+                        <div className='w-[300px] h-[30px] rounded-[15px] bg-[#ecedee] mb-[20px]'></div>
+                        <div className='w-[70px] h-[30px] rounded-[15px] bg-[#ecedee] mb-[40px]'></div>
+                        <div className='w-[70px] h-[20px] rounded-[10px] bg-[#ecedee] mb-[20px] hidden md:block'></div>
+                        <div className="flex items-center md:items-end flex-wrap md:flex-nowrap">
+                            <div className='flex flex-1 md:flex-none w-[120px] h-[46px] rounded-[10px] bg-[#ecedee]'></div>
+                            <div className='w-[120px] h-[46px] rounded-[10px] bg-[#ecedee] grow shrink ml-[10px]'></div>
+                        </div>
+                        <div className='w-full mt-[20px] h-[46px] rounded-[10px] bg-[#ecedee]'></div>
+                        <div className="flex items-center mt-[44px] pb-[16px] border-b border-b-[1px] border-[#e5e7eb]">
+                            <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+                            <div className='w-[100px] h-[20px] rounded-[10px] bg-[#ecedee] ml-[20px]'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="w-full lg:max-w-[1200px] mx-auto my-[56px] md:my-[60px] ">
@@ -127,7 +132,23 @@ const Products = () => {
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 px-[15px] md:px-[10px]">
-                <Carousel front={product[0] ? product[0].front : null} side={product[0] ? product[0].side : null} />
+                <Suspense fallback={
+                    <>
+                        <div className="w-full px-[20px] md:px-[16px] grid grid-cols-1 md:grid-cols-[80px,calc(100%-100px)] grid-rows-[300px] md:grid-rows-[500px] gap-[20px] justify-center">
+                            <div className="hidden md:flex flex-col">
+                                <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
+                                <div className="w-[80px] h-[80px] mb-[20px] bg-[#ecedee]"></div>
+                            </div>
+                            <div className="w-full h-full md:rounded-[10px] bg-[#ecedee]"></div>
+                            <div className="flex w-full justify-center md:hidden items-center">
+                                <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
+                                <div className='w-[10px] h-[10px] rounded-full bg-[#ecedee] mx-[5px]'></div>
+                            </div>
+                        </div>
+                    </>
+                }>
+                    <Carousel front={product[0] ? product[0].front : null} side={product[0] ? product[0].side : null} />
+                </Suspense>
                 <div className='w-full md:px-4 mt-[20px] md:mt-0'>
                     <h3 className='text-[1.2rem] text-gray-700'>{product[0] ?  product[0].nom : ''}</h3>
                     <p className='text-[20px] md:text-[1.4rem] text-gray-700 md:py-[10px]'>${product[0] ? product[0].price : ''}</p>
@@ -221,9 +242,9 @@ const Products = () => {
                 <h2 className="text-[24px] md:text-[36px] mb-[56px]">You Might Also Like</h2>
                 
             </div>
-            {width < strockWidth ? <div className='fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white p-[20px]'>{`width < strockWidth`}</div> :
+            {/* {width < strockWidth ? <div className='fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white p-[20px]'>{`width < strockWidth`}</div> :
                 <div className='fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white p-[20px]'>{`width > strockwidth`}</div>
-            }
+            } */}
             <div className='bottom-navbar w-full fixed bottom-0 left-0 px-[16px] py-[14px] md:p-0 bg-white border-box z-40 translate-y-[100%] transition ease-in-out duration-300 delay-0' style={{boxShadow:'0 0 10px 0 rgb(0 0 0 / 9%'}}>
                 <div className="w-full lg:max-w-[calc(1100px+calc(35px/1.25)*2)] px-0 md:px-[16px] lg:px-[28px] mx-auto flex justify-between items-center">
                     <div className="hidden md:flex items-center">
