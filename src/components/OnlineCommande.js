@@ -54,7 +54,7 @@ const OnlineCommande = () => {
                 zipcode: addresses[0].zipcode,
                 phone: addresses[0].phone
             });
-            document.getElementById(addresses[0]._id).selected = 'selected'
+            // document.getElementById(addresses[0]._id).selected = 'selected'
         }
     }, [addresses])
 
