@@ -39,7 +39,6 @@ const OnlineCommande = () => {
         if (id) {
             dispatch(getProduct(id));
         }
-        console.log('dispatch');
     }, [])
 
     useEffect(() => {
@@ -55,7 +54,6 @@ const OnlineCommande = () => {
                 zipcode: addresses[0].zipcode,
                 phone: addresses[0].phone
             });
-            console.log(addresses[0]._id);
             document.getElementById(addresses[0]._id).selected = 'selected'
         }
     }, [addresses])
@@ -183,7 +181,7 @@ const OnlineCommande = () => {
         navigate('/account')
     }
 
-    if (countries.length === 0) {
+    if (countries.length === 0 || addresses.length === 0) {
         return (
             <div className='fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#fff] z-50 overflow-y-auto'>
                 <div className='flex items-start flex flex-col md:flex-row'>
