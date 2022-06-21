@@ -201,7 +201,6 @@ const OnlineCommande = () => {
                                     <div className="flex py-[12px] w-full">
                                         <div className='relative'>
                                             <IKImage path={product[0].side} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" />
-                                            {/* <img src={'/images/'+product[0].side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" /> */}
                                             <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
                                                 <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{quantity}</span>
                                             </div>
@@ -218,7 +217,6 @@ const OnlineCommande = () => {
                                         <div className="flex py-[12px] w-full" key={index}>
                                             <div className='relative'>
                                                 <IKImage path={item.side} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" />
-                                                {/* <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" /> */}
                                                 <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
                                                     <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
                                                 </div>
@@ -279,7 +277,7 @@ const OnlineCommande = () => {
                             </div>
                             <h2 className='text-[18px] mb-[20px] text-gray-500'>Contact information</h2>
                             <div className='flex items-center'>
-                                <img className='w-[50px] h-[50px] rounded-[8px]' src="/images/Ldn_300x300.webp" alt="" />
+                                <img className='w-[50px] h-[50px] rounded-[8px]' src="/images/user.png" alt="" />
                                 <div className='ml-[10px]'>
                                     <p className='text-gray-500 text-[0.9rem]'>megherbi mohamed (megherbimeddz@gmail.com)</p>
                                     <button onClick={logout} className='border-0 outline-0 bg-transparent text-[#bd8c27]'>Logout</button>
@@ -355,7 +353,6 @@ const OnlineCommande = () => {
                                     <div className="flex py-[12px] w-full">
                                         <div className='relative'>
                                             <IKImage path={product[0].side} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" />
-                                            {/* <img src={'/images/'+product[0].side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" /> */}
                                             <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
                                                 <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{quantity}</span>
                                             </div>
@@ -374,7 +371,6 @@ const OnlineCommande = () => {
                                         <div className="flex py-[12px] w-full" key={index}>
                                             <div className='relative'>
                                                 <IKImage path={item.side} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" />
-                                                {/* <img src={'/images/'+item.side} className="min-w-[65px] h-[65px] rounded-[8px] border-[1px] border-[#dedede]" alt="" /> */}
                                                 <div className='absolute w-[21px] h-[21px] rounded-[100%] bg-[#808080] right-[-5px] top-[-10px]'>
                                                     <span className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text-white text-[0.7rem]'>{item.quantity}</span>
                                                 </div>
