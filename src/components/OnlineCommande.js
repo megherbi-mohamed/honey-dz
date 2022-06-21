@@ -90,7 +90,7 @@ const OnlineCommande = () => {
     
     useEffect(() => {
         if (countries.length > 0) {
-            if (countries.length > 0) {
+            if (addresses.length > 0) {
                 if (addresses[0].country) {
                     document.getElementById(addresses[0].country).selected = 'selected'
                 }
