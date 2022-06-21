@@ -1,5 +1,5 @@
 export const setScroll = () => {
-    window.addEventListener("scroll", () => {
+    // window.addEventListener("scroll", () => {
         // if (location.pathname === '/products/'+id) {
             if (window.innerWidth < 768) {
                 if (document.documentElement.scrollTop <= 50) {
@@ -24,5 +24,5 @@ export const setScroll = () => {
                 })
             }
         // }
-    })
+    // })
 }

@@ -1,18 +1,21 @@
-import React from 'react'
+import React,{lazy,Suspense} from 'react'
 import { useParams } from 'react-router-dom';
-import OnlineCommande from './OnlineCommande';
-import OfflineCommande from './OfflineCommande';
+
+const OnlineCommande = lazy(()=> import('./OnlineCommande'));
+const OfflineCommande = lazy(()=> import('./OfflineCommande'));
 
 const Commande = () => {
 
-    const {type} = useParams();
+    let {type} = useParams();
 
     if (type === 'online') {
-        return <OnlineCommande />
+        return <Suspense fallback={<></>}> <OnlineCommande /> </Suspense>
     }
+
     if (type === 'offline') {
-        return <OfflineCommande />
-    } 
+        return <Suspense fallback={<></>}> <OfflineCommande /> </Suspense>
+    }
+
 }
 
 export default Commande
