@@ -20,7 +20,7 @@ const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(getAllProducts());
+        dispatch(getAllProducts());
     },[])
 
     return (

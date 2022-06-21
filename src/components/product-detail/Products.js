@@ -21,7 +21,7 @@ const Products = () => {
     
     useEffect(() => {
         dispatch(getProduct(id));
-        setScroll();
+        // setScroll();
     },[])
 
     const displayAskQuestion = () => {
@@ -72,6 +72,9 @@ const Products = () => {
             }
         }
     }
+
+    const width = window.innerWidth;
+    const strockWidth = 768;
 
     // if (product.length === 0) {
     //     return (
@@ -218,6 +221,9 @@ const Products = () => {
                 <h2 className="text-[24px] md:text-[36px] mb-[56px]">You Might Also Like</h2>
                 
             </div>
+            {width < strockWidth ? <div className='fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white p-[20px]'>{`width < strockWidth`}</div> :
+                <div className='fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white p-[20px]'>{`width > strockwidth`}</div>
+            }
             <div className='bottom-navbar w-full fixed bottom-0 left-0 px-[16px] py-[14px] md:p-0 bg-white border-box z-40 translate-y-[100%] transition ease-in-out duration-300 delay-0' style={{boxShadow:'0 0 10px 0 rgb(0 0 0 / 9%'}}>
                 <div className="w-full lg:max-w-[calc(1100px+calc(35px/1.25)*2)] px-0 md:px-[16px] lg:px-[28px] mx-auto flex justify-between items-center">
                     <div className="hidden md:flex items-center">

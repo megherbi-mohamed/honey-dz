@@ -11,8 +11,6 @@ export default function Slider() {
         {src: 'Slide_1_desktop_2DvWlpyih.webp'},
     ]
 
-    // const width = window.innerWidth;
-
     const [slideIndex, setSlideIndex] = useState(1)
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
     const [dropDown, setdropDown] = useState(intiDropDown)
@@ -89,8 +87,7 @@ export default function Slider() {
     return (
         <div className="container-slider">
             <>
-                {images.map(function(image,i){
-                    return (
+                {images.map((image,i) => (
                         <IKContext urlEndpoint={urlEndpoint}>
                             <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
                                 <IKImage
@@ -101,8 +98,8 @@ export default function Slider() {
                                 />
                             </div>
                         </IKContext>
-                    )
-                })}
+                        // <link rel="preload" as="image" href={urlEndpoint+image.src} imagesrcset={urlEndpoint+image.src} />
+                ))}
                 <div className="container-dots">
                     {images.map(function(image,i){
                         return (
