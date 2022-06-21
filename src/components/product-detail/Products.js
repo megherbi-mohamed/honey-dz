@@ -9,6 +9,7 @@ import { IKContext,IKImage } from 'imagekitio-react';
 
 import { getProduct } from '../../actions/products';
 import { setScroll } from '../Functions';
+
 const Carousel = lazy(()=> import('./Carousel'));
 
 const Products = () => {
