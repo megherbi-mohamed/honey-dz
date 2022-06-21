@@ -34,17 +34,15 @@ const Products = (props) => {
                                 lqip={{ active: true, quality: 10, blur: 10 }}
                                 loading="lazy"
                                 width="auto"
-                                className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}
+                                className={`w-[298px] transition-opacity duration-1000 ease-in-out ${opcaity.side}`}
                             />
                             <IKImage
-                                path={props.side}
+                                path={props.front}
                                 lqip={{ active: true, quality: 10, blur: 10 }}
                                 loading="lazy"
                                 width="auto"
                                 className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}
                             />
-                            {/* <img src={'/images/'+props.side} alt="" className={`w-[298px] transition-opacity duration-1000 ease-in-out${opcaity.side}`}/>
-                            <img src={'/images/'+props.front} alt="" className={`w-[298px] -translate-x-[100%] opacity-0 transition-opacity duration-1000 ease-in-out ${opcaity.front}`}/> */}
                     </div>
                 </Link>
                 <Link className='relative after:content-[""] after:w-[50px] after:h-[100%] after:border-b-[2px] after:border-b-black after:absolute after:top-0 after:translate-x-[-50%]' to={`/products/${props.nom.replace(/\s/g, '-')}`}>
