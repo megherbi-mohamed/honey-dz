@@ -51,7 +51,7 @@ const App = () => {
         <IKContext urlEndpoint={urlEndpoint}>
           <AlertProvider template={AlertTemplate} {...options}>
             <CartProvider>
-            <Suspense fallback={<></>}>
+            <Suspense fallback={<>waiting</>}>
               <Navbar /> 
               <ScrollTop /> 
                 <Routes>
