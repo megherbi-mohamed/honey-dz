@@ -6,9 +6,9 @@ import './Slider.css'
 export default function Slider() {
 
     let images = [
-        {src: 'Slide_3_desktop_JZlNcONlS.webp'},
-        {src: 'Slide_2_desktop_D4Dh5a16L.webp'},
-        {src: 'Slide_1_desktop_2DvWlpyih.webp'},
+        {src: 'Slide_1_desktop_2DvWlpyih_7_eRoRVZG.webp'},
+        // {src: 'Slide_2_desktop_D4Dh5a16L.webp'},
+        // {src: 'Slide_1_desktop_2DvWlpyih.webp'},
     ]
 
     const [slideIndex, setSlideIndex] = useState(1)
@@ -91,7 +91,7 @@ export default function Slider() {
                             path={image.src}
                             lqip={{ active: true, quality: 10, blur: 10 }}
                             loading="lazy"
-                            className="w-[412px] h-[240px] md:h-auto md:w-auto"
+                            className="w-auto"
                         />
                     </div>
                 ))}
