@@ -91,7 +91,7 @@ export default function Slider() {
                             path={image.src}
                             lqip={{ active: true, quality: 10, blur: 10 }}
                             loading="lazy"
-                            width="auto"
+                            className="w-auto h-[240px] md:h-auto"
                         />
                     </div>
                 ))}
