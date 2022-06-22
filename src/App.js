@@ -1,5 +1,5 @@
-import React, {lazy,Suspense} from "react";
-import {BrowserRouter,Route,Routes} from 'react-router-dom';
+import React, { lazy,Suspense } from "react";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartProvider } from "react-use-cart";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
@@ -51,7 +51,7 @@ const App = () => {
         <IKContext urlEndpoint={urlEndpoint}>
           <AlertProvider template={AlertTemplate} {...options}>
             <CartProvider>
-            <Suspense fallback={<>waiting</>}>
+            <Suspense fallback={<></>}>
               <Navbar /> 
               <ScrollTop /> 
                 <Routes>
