@@ -8,7 +8,7 @@ import { useAlert } from 'react-alert'
 import { IKImage } from 'imagekitio-react';
 
 import { insertOfflineCartCommande, insertOfflineProductCommande } from '../actions/commande';
-import { getAllCountries, getStates } from '../actions/countryState';
+import { getStates } from '../actions/countryState';
 import { getProduct } from '../actions/products';
 
 const OfflineCommande = () => {
@@ -16,7 +16,7 @@ const OfflineCommande = () => {
     let {id,quantity} = useParams();
 
     const {product} = useSelector((state) => state.products);
-    const {countries,states} = useSelector((state) => state.countryState);
+    const {states} = useSelector((state) => state.countryState);
     const {loading,message} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ const OfflineCommande = () => {
     const [form, setForm] = useState([])
 
     useEffect(() => {
-        dispatch(getAllCountries());
+        // dispatch(getAllCountries());
         if (id) {
             dispatch(getProduct(id));
         }
@@ -44,12 +44,12 @@ const OfflineCommande = () => {
         }); 
     }, [])
 
-    useEffect(() => {
-        if (countries.length > 0) {
-            document.getElementById('DZ').selected = 'selected'
-            dispatch(getStates('DZ'));
-        }
-    }, [countries])
+    // useEffect(() => {
+    //     if (countries.length > 0) {
+    //         document.getElementById('DZ').selected = 'selected'
+    //         dispatch(getStates('DZ'));
+    //     }
+    // }, [countries])
 
     useEffect(() => {
         if (states.length > 0) {
@@ -121,7 +121,7 @@ const OfflineCommande = () => {
         navigate('/')
     }
 
-    if (countries.length === 0) {
+    if (product.length > 0) {
         return (
             <div className='fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#fff] z-50 overflow-y-auto'>
                 <div className='flex items-start flex flex-col md:flex-row'>
@@ -309,10 +309,10 @@ const OfflineCommande = () => {
                             <input onChange={handleChange} type="text" name="address1" placeholder='Addess' value={form.address1 || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                             <input onChange={handleChange} type="text" name="address2" placeholder='Apartement, suite, etc. (optional)' value={form.address2 || ''} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
                             <div className='w-full grid grid-cols-3 gap-[15px] mt-[5px]'>
-                                <div className='w-full relative'>
-                                    <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Country/Region</span>
+                                {/* <div className='w-full relative'> */}
+                                    {/* <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>Country/Region</span> 
                                     <div className="select-wrapper">
-                                        <select onChange={handleChange} name="country" id='country' className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
+                                         <select onChange={handleChange} name="country" id='country' className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">
                                             {countries ?
                                                 countries.map((country,index)=>(
                                                     <option key={index} id={country.isoCode} value={country.isoCode}>{country.name}</option>
@@ -320,9 +320,10 @@ const OfflineCommande = () => {
                                                 :
                                                 <option value="">vide</option>
                                             }
-                                        </select>
-                                    </div>
-                                </div>
+                                        </select> */}
+                                        <input onChange={handleChange} type="text" name="coutry" value={form.address1 || 'Algeria'} autoComplete="off" className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' />
+                                    {/* </div> */}
+                                {/* </div> */}
                                 <div className="select-wrapper">
                                     <span className='absolute top-[5px] left-[12px] text-[0.7rem] text-gray-500'>State</span>
                                     <select onChange={handleChange} name="state" className="w-full p-[9.5px] pr-[30px] pt-[15px] outline-none border-[1.5px] bg-transparent border-gray rounded text-[0.9rem]">

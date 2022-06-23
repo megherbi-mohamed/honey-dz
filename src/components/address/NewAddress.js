@@ -9,11 +9,11 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import Menu from './Menu';
 
 import { insertAddress } from '../../actions/address';
-import { getAllCountries,getStates } from '../../actions/countryState';
+import { getStates } from '../../actions/countryState';
 
 const NewAddress = () => {
 
-    const {countries,states} = useSelector((state) => state.countryState);
+    const {states} = useSelector((state) => state.countryState);
     const {message, loading} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const alert = useAlert();
@@ -34,7 +34,6 @@ const NewAddress = () => {
             zipcode: '',
             phone: ''
         });
-        dispatch(getAllCountries());
     }, [])
 
     useEffect(() => {
@@ -43,12 +42,12 @@ const NewAddress = () => {
         }
     }, [message])
 
-    useEffect(() => {
-        if (countries.length > 0) {
-            document.getElementById('DZ').selected = 'selected';
-            dispatch(getStates('DZ'));
-        }
-    }, [countries])
+    // useEffect(() => {
+    //     if (countries.length > 0) {
+    //         document.getElementById('DZ').selected = 'selected';
+    //         dispatch(getStates('DZ'));
+    //     }
+    // }, [countries])
 
     useEffect(() => {
         if (states.length > 0) {
@@ -84,53 +83,53 @@ const NewAddress = () => {
         }
     }
 
-    if (countries.length == 0) {
-        return(
-            <>
-                <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
-                    <div className='w-[200px] h-[30px] mx-auto rounded-[15px] bg-[#ecedee]'></div>
-                    <div className="flex items-center justify-center mt-[30px]">
-                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
-                        <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                    </div>
-                </div>
-                <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
-                    <div className="md:px-4 xl:px-16 w-1/6 sf-customer__nav hidden md:flex flex-col border-r border-color-border">
-                        <div className='mb-[10px] w-[120px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='mb-[10px] w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                    </div>
-                    <div className="px-4 md:px-8 xl:px-16 2xl:px-24 w-full md:w-5/6">
-                        <div className='w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
+    // if (countries.length == 0) {
+    //     return(
+    //         <>
+    //             <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
+    //                 <div className='w-[200px] h-[30px] mx-auto rounded-[15px] bg-[#ecedee]'></div>
+    //                 <div className="flex items-center justify-center mt-[30px]">
+    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <FontAwesomeIcon icon={faAngleRight} className="text-[12px] text-[#e0e0e0] mx-[20px]" />
+    //                     <div className='m-0 w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                 </div>
+    //             </div>
+    //             <div className='md:px-6 lg:px-12 xl:px-16 2xl:px-48 py-8 md:py-12 lg:py-20 flex'>
+    //                 <div className="md:px-4 xl:px-16 w-1/6 sf-customer__nav hidden md:flex flex-col border-r border-color-border">
+    //                     <div className='mb-[10px] w-[120px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='mb-[10px] w-[100px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                 </div>
+    //                 <div className="px-4 md:px-8 xl:px-16 2xl:px-24 w-full md:w-5/6">
+    //                     <div className='w-[150px] h-[20px] rounded-[10px] bg-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
+    //                     <div className='mt-[30px] mb-[10px] w-[110px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     <div className='w-full h-[45px] rounded-[5px] border-[2px] border-[#ecedee]'></div>
 
-                        <div className='flex items-center mt-[30px]'>
-                            <div className='w-[180px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
-                            <div className='ml-[20px] w-[90px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
-                        </div>
-                    </div>
-                </div>
-            </>
-        )
-    }
+    //                     <div className='flex items-center mt-[30px]'>
+    //                         <div className='w-[180px] h-[40px] rounded-[5px] bg-[#ecedee]'></div>
+    //                         <div className='ml-[20px] w-[90px] h-[15px] rounded-[10px] bg-[#ecedee]'></div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </>
+    //     )
+    // }
 
     return (
         <>
@@ -166,15 +165,7 @@ const NewAddress = () => {
                             </div>
                             <div className='mb-[1.5rem]'>
                                 <label htmlFor="">Country</label>
-                                <select className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' onChange={handleChange} name="country" id='country'>
-                                    {countries ?
-                                        countries.map((country,index)=>(
-                                            <option key={index} id={country.isoCode} value={country.isoCode}>{country.name}</option>
-                                        ))
-                                        :
-                                        <option value="">vide</option>
-                                    }
-                                </select>
+                                <input className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' onChange={handleChange} type="text" name='country' value={form.country || 'Algeria'} placeholder='Country' autoComplete='off'/>
                             </div>
                             <div className='mb-[1.5rem]'>
                                 <label htmlFor="">State</label>

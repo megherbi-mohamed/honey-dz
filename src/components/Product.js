@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useCart } from 'react-use-cart'
 import { IKImage } from 'imagekitio-react';
 
-const Products = (props) => {
+const Product = (props) => {
 
     let opacityImage = {side:'',front:''}
     const [opcaity, setopcaity] = useState(opacityImage)
@@ -24,9 +24,10 @@ const Products = (props) => {
         addItem(product,1)
         dispatch({ type: 'display', payload: {cart:'!translate-x-[0]',hideBody:'!block'}})
     } 
+
     return (
         <>
-            <div className={`${props.style.style} border-box pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px] text-center relative`} onMouseEnter={() => {setopcaity({side:'lg:opacity-0',front:'lg:!opacity-100'});settransform({translateX:'lg:!translate-x-[0]',translateY:'lg:!translate-y-[0]'})}} onMouseLeave={() => {setopcaity({side:'',front:''});settransform({translateX:'',translateY:''})}}>
+            <div key ={props.i} className={`px-[7.5px] border-box pb-[20px] lg:px-0 pb-[30px] lg:pb-[20px] text-center relative`} onMouseEnter={() => {setopcaity({side:'lg:opacity-0',front:'lg:!opacity-100'});settransform({translateX:'lg:!translate-x-[0]',translateY:'lg:!translate-y-[0]'})}} onMouseLeave={() => {setopcaity({side:'',front:''});settransform({translateX:'',translateY:''})}}>
                 <Link to={`/products/${props.id}`}>
                     <div className="w-[298px] relative overflow-hidden flex items-center mx-auto">
                             <IKImage
@@ -58,4 +59,4 @@ const Products = (props) => {
     )
 }
 
-export default Products
+export default Product

@@ -4,7 +4,7 @@ import { useSelector,useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
-import Product from './Product';
+import Product from './Products';
 import { getCategoryProducts } from '../actions/products';
 
 const Collections = () => {

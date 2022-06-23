@@ -75,9 +75,10 @@ const Products = () => {
         }
     }
 
-    // const width = window.innerWidth;
-    // const strockWidth = 768;
-
+    useEffect(() => {
+        console.log(product);
+    }, [product])
+   
     if (product.length === 0) {
         return (
             <div className="w-full lg:max-w-[1200px] mx-auto my-[56px] md:my-[60px] ">

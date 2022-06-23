@@ -10,7 +10,7 @@ import Menu from './Menu';
 
 import { updateAddress } from '../../actions/address';
 import { getUserAddress } from '../../actions/address';
-import { getAllCountries, getStates } from '../../actions/countryState';
+import { getStates } from '../../actions/countryState';
 
 
 const AddressForm = () => {
@@ -18,7 +18,7 @@ const AddressForm = () => {
     let { id } = useParams();
 
     const {address} = useSelector((state) => state.addresses);
-    const {countries,states} = useSelector((state) => state.countryState);
+    const {states} = useSelector((state) => state.countryState);
     const {message, loading} = useSelector((state) => state.message);
     const dispatch = useDispatch();
     const alert = useAlert();
@@ -28,7 +28,6 @@ const AddressForm = () => {
 
     useEffect(() => {
         dispatch(getUserAddress(id));
-        dispatch(getAllCountries());
     }, [])
     
     useEffect(() => {
@@ -51,21 +50,21 @@ const AddressForm = () => {
         }
     }, [message])
 
-    useEffect(() => {
-        if (countries.length > 0) {
-            if (address.country) {
-                document.getElementById(address.country).selected = 'selected'
-            }
-            else{
-                document.getElementById('DZ').selected = 'selected'
-            }
-            dispatch(getStates(address.country));
-        }
-    }, [countries,address,dispatch])
+    // useEffect(() => {
+    //     if (countries.length > 0) {
+    //         if (address.country) {
+    //             document.getElementById(address.country).selected = 'selected'
+    //         }
+    //         else{
+    //             document.getElementById('DZ').selected = 'selected'
+    //         }
+    //         dispatch(getStates(address.country));
+    //     }
+    // }, [countries,address,dispatch])
 
-    useEffect(() => {
-        dispatch(getStates(form.country));
-    }, [form.country,dispatch])
+    // useEffect(() => {
+    //     dispatch(getStates(form.country));
+    // }, [form.country,dispatch])
     
     useEffect(() => {
         if (states.length > 0) {
@@ -90,7 +89,7 @@ const AddressForm = () => {
         }
     }
 
-    if (!address || countries.length == 0) {
+    if (!address) {
         return (
             <>
                 <div className="mt-[70px] px-[16px] py-[30px] md:py-[56px] text-center">
@@ -172,15 +171,7 @@ const AddressForm = () => {
                             </div>
                             <div className='mb-[1.5rem]'>
                                 <label htmlFor="">Country</label>
-                                <select className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' onChange={handleChange} name="country" id='country'>
-                                    {countries ?
-                                        countries.map((country,index)=>(
-                                            <option key={index} id={country.isoCode} value={country.isoCode}>{country.name}</option>
-                                        ))
-                                        :
-                                        <option value="">vide</option>
-                                    }
-                                </select>
+                                <input className='mt-[5px] mb-[10px] px-[12px] py-[10px] w-full border border-[#dbdbdb] rounded-[5px] outline-0 transition-[border] duration-400 ease-in-out focus:border-[#bd8c27]' onChange={handleChange} type="text" name='country' value={form.country || 'Algeria'} placeholder='Country' autoComplete='off'/>
                             </div>
                             <div className='mb-[1.5rem]'>
                                 <label htmlFor="">State</label>
