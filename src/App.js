@@ -5,8 +5,10 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { IKContext } from 'imagekitio-react';
 
+import Home
+ from "./components/Home";
 const Navbar = lazy(()=> import('./components/navbar/Navbar'));
-const Home = lazy(()=> import('./components/Home'));
+// const Home = lazy(()=> import('./components/Home'));
 const About = lazy(()=> import('./components/About'));
 const Account = lazy(()=> import('./components/account/Account'));
 const Signin = lazy(()=> import('./components/account/Signin'));
