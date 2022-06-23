@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
-import { IKImage, IKContext } from 'imagekitio-react';
+import { IKImage } from 'imagekitio-react';
 import './Slider.css'
 
 export default function Slider() {
@@ -14,7 +14,6 @@ export default function Slider() {
     const [slideIndex, setSlideIndex] = useState(1)
     let intiDropDown = {button1:'!visible md:!translate-y-[0] !opacity-100',button2:'',button3:'',button4:'',button5:''}
     const [dropDown, setdropDown] = useState(intiDropDown)
-    const breakpoint = 620;
 
     // var intervalTime = 4000;
     
@@ -87,11 +86,7 @@ export default function Slider() {
             <>
                 {images.map((image,i) => (
                     <div key={i} className={slideIndex === i + 1 ? "slide active-anim" : "slide"} >
-                        <IKImage
-                            path={image.src}
-                            lqip={{ active: true, quality: 10, blur: 10 }}
-                            loading="lazy"
-                            className="w-auto"
+                        <IKImage path={image.src} lqip={{ active: true, quality: 10, blur: 10 }} loading="lazy" className="w-auto"
                         />
                     </div>
                 ))}
