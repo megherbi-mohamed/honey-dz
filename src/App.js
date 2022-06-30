@@ -5,22 +5,37 @@ import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { IKContext } from 'imagekitio-react';
 
-// import Home from "./components/Home";
-const Navbar = lazy(()=> import('./components/navbar/Navbar'));
-const Home = lazy(()=> import('./components/Home'));
-const About = lazy(()=> import('./components/About'));
-const Account = lazy(()=> import('./components/account/Account'));
-const Signin = lazy(()=> import('./components/account/Signin'));
-const Register = lazy(()=> import('./components/account/Register'));
-const Addresses = lazy(()=> import('./components/address/Addresses'));
-const NewAddress = lazy(()=> import('./components/address/NewAddress'));
-const AddressForm = lazy(()=> import('./components/address/AddressForm'));
-const Products = lazy(()=> import('./components/product-detail/Products'));
-const Collections = lazy(()=> import('./components/Collections'));
-const TermsConditions = lazy(()=> import('./components/TermsConditions'));
-const OnlineCommande = lazy(()=> import('./components/OnlineCommande'));
-const OfflineCommande = lazy(()=> import('./components/OfflineCommande'));
-const Cart = lazy(()=> import('./components/Cart'));
+import Home from "./components/Home";
+import Navbar from "./components/navbar/Navbar";
+import About from "./components/About";
+import Account from "./components/account/Account";
+import Signin from "./components/account/Signin";
+import Register from "./components/account/Register";
+import Addresses from "./components/address/Addresses";
+import AddressForm from "./components/address/AddressForm"
+import NewAddress from "./components/address/NewAddress";
+import Products from "./components/product-detail/Products";
+import Collections from "./components/Collections";
+import TermsConditions from "./components/TermsConditions";
+import OnlineCommande from "./components/OnlineCommande";
+import OfflineCommande from "./components/OfflineCommande";
+import Cart from "./components/Cart";
+
+// const Navbar = lazy(()=> import('./components/navbar/Navbar'));
+// const Home = lazy(()=> import('./components/Home'));
+// const About = lazy(()=> import('./components/About'));
+// const Account = lazy(()=> import('./components/account/Account'));
+// const Signin = lazy(()=> import('./components/account/Signin'));
+// const Register = lazy(()=> import('./components/account/Register'));
+// const Addresses = lazy(()=> import('./components/address/Addresses'));
+// const NewAddress = lazy(()=> import('./components/address/NewAddress'));
+// const AddressForm = lazy(()=> import('./components/address/AddressForm'));
+// const Products = lazy(()=> import('./components/product-detail/Products'));
+// const Collections = lazy(()=> import('./components/Collections'));
+// const TermsConditions = lazy(()=> import('./components/TermsConditions'));
+// const OnlineCommande = lazy(()=> import('./components/OnlineCommande'));
+// const OfflineCommande = lazy(()=> import('./components/OfflineCommande'));
+// const Cart = lazy(()=> import('./components/Cart'));
 const Footer = lazy(()=> import('./components/footer/Footer'));
 
 const ScrollTop = lazy(()=> import('./components/ScrollTop'));
@@ -52,9 +67,7 @@ const App = () => {
         <IKContext urlEndpoint={urlEndpoint}>
           <AlertProvider template={AlertTemplate} {...options}>
             <CartProvider>
-              <Suspense fallback={<></>}>
               <Navbar /> 
-              <ScrollTop /> 
                 <Routes>
                   <Route exact path="/" element={ <Home /> } />
                   <Route exact path="/about" element={<About />} />
@@ -73,6 +86,8 @@ const App = () => {
                   <Route exact path="/commande/online" element={<OnlineCommande />} />
                   <Route exact path="/commande/online/:id/:quantity" element={<OnlineCommande />} />
                 </Routes>
+              <Suspense fallback={<></>}>
+                <ScrollTop />
                 <HideBody /> 
                 <QuikViewProduct /> 
                 <SideCart /> 
